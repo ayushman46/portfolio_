@@ -13,11 +13,11 @@ export default function ScrollProgress() {
   return (
     <>
       {/* Scroll track (background) */}
-      <div className="fixed top-0 right-0 w-[2px] h-screen bg-white/[0.05] z-50 mix-blend-difference hidden md:block" />
+      <div className="fixed top-0 right-0 w-[2px] h-screen bg-white/[0.05] z-50 hidden md:block" />
       
       {/* Scroll progress (foreground) */}
       <motion.div
-        className="fixed top-0 right-0 w-[2px] bg-white z-50 mix-blend-difference origin-top hidden md:block"
+        className="fixed top-0 right-0 w-[2px] bg-white/60 z-50 origin-top hidden md:block"
         style={{ scaleY, height: "100vh" }}
       />
     </>

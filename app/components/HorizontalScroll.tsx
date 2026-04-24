@@ -83,7 +83,6 @@ export default function HorizontalScroll() {
       >
         {/* Opening card with section title */}
         <div className="flex-shrink-0 w-[40vw] min-w-[350px] flex flex-col justify-center h-full pr-12 relative">
-          <div className="absolute top-1/2 left-0 w-[200px] h-[200px] bg-indigo-500/10 blur-[100px] -translate-y-1/2 pointer-events-none rounded-full" />
           <h2 className="text-4xl md:text-6xl font-serif italic text-white/90 leading-[1.1] mb-6">
             Case<br />Studies.
           </h2>

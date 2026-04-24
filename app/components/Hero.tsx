@@ -73,9 +73,6 @@ export default function Hero() {
         animate="visible"
         className="relative z-10 text-center max-w-5xl mx-auto"
       >
-        {/* Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/[0.04] rounded-full blur-[120px] pointer-events-none -z-10" />
-
         <div className="flex flex-col items-start text-left w-full">
           {/* Refined Name with Mask Reveal */}
           <div className="overflow-hidden mb-12 py-2">
