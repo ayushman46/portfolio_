@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Engineering Portfolio | Ayushman Chakraborty
 
-## Getting Started
+A high-performance, agency-grade digital experience engineered for a Machine Learning perspective. This project leverages physics-based animation and architectural design principles to present technical expertise in a cinematic, editorial format.
 
-First, run the development server:
+## Core Philosophy
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The objective was to transcend the standard technical portfolio by implementing high-end design patterns found in top-tier Awwwards-winning websites. The interface prioritizes precision, motion, and hardware-accelerated performance to reflect a meticulous engineering approach.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technical Architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application is built on a modern stack focused on rendering efficiency and interactive depth:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS with custom Design Tokens
+- **Motion Engine**: GSAP (ScrollTrigger) and Framer Motion
+- **Scroll Physics**: Lenis Smooth Scroll for momentum-based interaction
+- **Typography**: Variable Inter (UI) and Playfair Display (Editorial Serif)
 
-## Learn More
+## Key Implementation Details
 
-To learn more about Next.js, take a look at the following resources:
+### Performance and Optimization
+- **Hardware Acceleration**: Global animations utilize `will-change` properties and `translate3d` transforms to offload rendering to the GPU, maintaining a consistent 60fps.
+- **Adaptive Scrolling**: A hybrid scroll architecture that utilizes GSAP pinning for desktop mouse-wheel interactions and native CSS snap-scrolling for mobile touch physics.
+- **Optimized Filters**: Visual depth is achieved through high-contrast radial gradients and subtle backdrop blurs, engineered to minimize paint invalidation.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Interactive Components
+- **Magnetic UI**: Interaction design using magnetic button physics for enhanced user engagement.
+- **Scroll Progress HUD**: A razor-thin, gradient-based scroll indicator with a real-time percentage tracker.
+- **Cinematic Navigation**: A text-masking reveal system and horizontal project track that bleeding off-canvas for an expansive, architectural feel.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Local Development
 
-## Deploy on Vercel
+To initialize the project in a local environment:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ayushman46/portfolio_.git
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Execute the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Generate production build:
+   ```bash
+   npm run build
+   ```
+
+## Deployment
+
+The project is optimized for Vercel deployment. It includes specific configurations for Next.js middleware and edge caching to ensure low-latency delivery across global regions.
