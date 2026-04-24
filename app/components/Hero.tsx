@@ -99,12 +99,12 @@ export default function Hero() {
             </div>
 
             {/* Role Column */}
-            <div className="flex flex-col gap-5 min-w-[280px] pt-10 md:pt-12 relative w-full md:w-auto">
+            <div className="flex flex-col gap-3 md:gap-5 min-w-[280px] pt-8 md:pt-12 relative w-full md:w-auto mb-8 md:mb-0">
               <div className="flex items-center gap-4">
                 <span className="text-white/30 text-[10px] font-bold uppercase tracking-[0.4em]">Roles</span>
                 <div className="h-[1px] flex-1 bg-white/[0.05]" />
               </div>
-              <p className="text-white/90 text-xl font-medium tracking-tight">Machine Learning Engineer </p>
+              <p className="text-white/90 text-lg md:text-xl font-medium tracking-tight">Machine Learning Engineer </p>
             </div>
 
             {/* Vertical Divider with Crosshairs (Desktop only) */}
@@ -114,7 +114,7 @@ export default function Hero() {
             </div>
 
             {/* Focus Column */}
-            <div className="flex flex-col gap-5 pt-8 md:pt-12 w-full">
+            <div className="flex flex-col gap-3 md:gap-5 pt-0 md:pt-12 w-full">
               <div className="flex items-center gap-4">
                 <span className="text-white/30 text-[10px] font-bold uppercase tracking-[0.4em]">Focus</span>
                 <div className="h-[1px] w-12 bg-white/[0.05]" />

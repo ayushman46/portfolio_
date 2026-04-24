@@ -112,7 +112,7 @@ export default function Architecture() {
 
                 {/* Tags overflow hidden wrapper for smooth reveal */}
                 <div
-                  className={`overflow-hidden transition-all duration-700 ease-[0.16,1,0.3,1] ${hoveredIndex === i ? "max-h-[150px] opacity-100" : "max-h-0 opacity-0 md:max-h-[150px] md:opacity-100"
+                  className={`overflow-hidden transition-all duration-700 ease-[0.16,1,0.3,1] max-h-[150px] opacity-100 md:max-h-0 md:opacity-0 ${hoveredIndex === i ? "md:max-h-[150px] md:opacity-100" : ""
                     }`}
                 >
                   <div className="flex flex-wrap gap-2 pt-2">

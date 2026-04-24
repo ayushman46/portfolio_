@@ -46,7 +46,9 @@ export default function HorizontalScroll() {
     const track = trackRef.current;
     const totalScrollWidth = track.scrollWidth - window.innerWidth;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
       gsap.to(track, {
         x: -totalScrollWidth,
         ease: "none",
@@ -58,9 +60,9 @@ export default function HorizontalScroll() {
           invalidateOnRefresh: true,
         },
       });
-    }, sectionRef);
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
@@ -79,10 +81,10 @@ export default function HorizontalScroll() {
 
       <div
         ref={trackRef}
-        className="horizontal-scroll-container items-center h-full pl-[5vw] pr-[5vw] pt-20"
+        className="horizontal-scroll-container flex items-center h-full pl-[5vw] pr-[5vw] pt-20 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar"
       >
         {/* Opening card with section title */}
-        <div className="flex-shrink-0 w-[40vw] min-w-[350px] flex flex-col justify-center h-full pr-12 relative">
+        <div className="flex-shrink-0 w-[85vw] md:w-[40vw] min-w-[350px] flex flex-col justify-center h-full pr-12 relative snap-center md:snap-align-none">
           <h2 className="text-4xl md:text-6xl font-serif italic text-white/90 leading-[1.1] mb-6">
             Case<br />Studies.
           </h2>
@@ -95,7 +97,7 @@ export default function HorizontalScroll() {
         {projects.map((project, i) => (
           <div
             key={i}
-            className="flex-shrink-0 w-[75vw] md:w-[50vw] lg:w-[45vw] h-[75vh] max-h-[600px] px-4"
+            className="flex-shrink-0 w-[85vw] md:w-[50vw] lg:w-[45vw] h-[70vh] md:h-[75vh] max-h-[600px] px-2 md:px-4 snap-center md:snap-align-none"
           >
             <div 
               className="glass-card h-full p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group border border-white/[0.05] bg-white/[0.01] hover:bg-white/[0.03] transition-colors duration-700 cursor-none"
