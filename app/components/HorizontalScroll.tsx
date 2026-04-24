@@ -86,7 +86,7 @@ export default function HorizontalScroll() {
         {/* Opening card with section title */}
         <div className="flex-shrink-0 w-[85vw] md:w-[40vw] min-w-[350px] flex flex-col justify-center h-full pr-12 relative snap-center md:snap-align-none">
           <h2 className="text-4xl md:text-6xl font-serif italic text-white/90 leading-[1.1] mb-6">
-            Case<br />Studies.
+            Projects<br />
           </h2>
           <p className="text-white/30 text-sm md:text-base max-w-xs leading-relaxed font-light">
             A selection of engineering work spanning ML pipelines, computer vision, and autonomous agents.
@@ -99,7 +99,7 @@ export default function HorizontalScroll() {
             key={i}
             className="flex-shrink-0 w-[85vw] md:w-[50vw] lg:w-[45vw] h-[70vh] md:h-[75vh] max-h-[600px] px-2 md:px-4 snap-center md:snap-align-none"
           >
-            <div 
+            <div
               className="glass-card h-full p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group border border-white/[0.05] bg-white/[0.01] hover:bg-white/[0.03] transition-colors duration-700 cursor-none"
               data-cursor-hover
             >
