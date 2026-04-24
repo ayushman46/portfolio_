@@ -26,7 +26,7 @@ const lineVariants = {
     rotateZ: 0,
     transition: {
       duration: 1.4,
-      ease: [0.16, 1, 0.3, 1],
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
     },
   },
 };
@@ -36,7 +36,7 @@ const fadeUp = {
   visible: {
     y: 0,
     opacity: 1,
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.6 },
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.6 },
   },
 };
 
@@ -123,7 +123,7 @@ export default function Hero() {
                 <div className="h-[1px] w-12 bg-white/[0.05]" />
               </div>
               <p className="text-white/60 text-lg md:text-xl leading-relaxed font-light max-w-2xl">
-                Engineering AI for the real world. Specializing in agentic systems, multimodal models, and end-to-end MLOps architectures designed for impact.
+                Engineering AI for the real world. Specializing in agentic systems, multimodal models, and end to end MLOps architectures designed for impact.
               </p>
             </div>
           </motion.div>
