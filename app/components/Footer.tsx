@@ -7,11 +7,11 @@ import MagneticButton from "./MagneticButton";
 const links = [
   {
     label: "GitHub",
-    href: "https://github.com/ayushman-chakraborty",
+    href: "https://github.com/ayushman46",
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/in/ayushman-chakraborty",
+    href: "http://linkedin.com/in/ayushmanchakraborty/",
   },
   {
     label: "Email",
