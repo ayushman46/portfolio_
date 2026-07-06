@@ -1,36 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
-import ScrollProgress from "./components/ScrollProgress";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
+// Inter as substitute for PP Neue Montreal (Weight 300 acts as 350, 400 for buttons)
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  style: ["normal", "italic"],
+  weight: ["300", "400"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Ayushman Chakraborty — Machine Learning Engineer",
-  description:
-    "Portfolio of Ayushman Chakraborty. Machine Learning Engineer specializing in agentic systems, multimodal AI, and MLOps. Engineering AI for the real world.",
-  keywords: [
-    "Machine Learning",
-    "AI Engineer",
-    "MLOps",
-    "Portfolio",
-    "Ayushman Chakraborty",
-  ],
-  openGraph: {
-    title: "Ayushman Chakraborty — ML Engineer",
-    description:
-      "Engineering AI for the real world. Agentic systems, multimodal AI, and MLOps.",
-    type: "website",
-  },
+  title: "Ayushman Chakraborty — AI Engineer",
+  description: "Portfolio of Ayushman Chakraborty. Building intelligent software powered by AI. Designing scalable systems that transform ideas into production-ready products.",
 };
 
 export default function RootLayout({
@@ -39,9 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} antialiased`}>
-      <body className="min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-inter)] selection:bg-white selection:text-black relative">
-        <ScrollProgress />
+    <html lang="en" className={`${inter.variable} antialiased`} suppressHydrationWarning>
+      <body className="min-h-screen bg-off-white text-off-black relative font-sans">
         {children}
       </body>
     </html>

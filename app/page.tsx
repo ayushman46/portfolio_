@@ -1,24 +1,30 @@
 "use client";
 
 import SmoothScroll from "./components/SmoothScroll";
-import CustomCursor from "./components/CustomCursor";
+import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Philosophy from "./components/Philosophy";
-import Architecture from "./components/Architecture";
-import HorizontalScroll from "./components/HorizontalScroll";
-import Footer from "./components/Footer";
+import About from "./components/About";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import ResumeEducation from "./components/ResumeEducation";
+import Achievements from "./components/Achievements";
+import ContactFooter from "./components/ContactFooter";
 
 export default function Home() {
   return (
     <SmoothScroll>
-      <CustomCursor />
-      <main className="noise-overlay relative z-0">
+      <Navbar />
+      <main className="relative z-0 overflow-hidden">
         <Hero />
-        <Philosophy />
-        <Architecture />
-        <HorizontalScroll />
-        <Footer />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <ResumeEducation />
+        <Achievements />
       </main>
+      <ContactFooter />
     </SmoothScroll>
   );
 }
