@@ -44,7 +44,7 @@ export default function Projects() {
           {projects.map((project, idx) => (
             <div key={idx} className="flex flex-col gap-12 items-center group w-full">
               <div className="flex flex-col gap-4 items-center text-center">
-                <h3 className="text-[36px] md:text-[56px] text-[#111111] leading-[1.1] font-[500] tracking-[-0.03em]">{project.title}</h3>
+                <h3 className="text-[28px] md:text-[56px] text-[#111111] leading-[1.1] font-[500] tracking-[-0.03em]">{project.title}</h3>
                 <span className="text-[13px] text-[#AAAAAA] uppercase tracking-[0.2em] font-[500]">{project.type}</span>
               </div>
 
@@ -53,7 +53,7 @@ export default function Projects() {
                 <span className="text-[13px] text-[#888888] uppercase tracking-[0.2em] opacity-50 font-[500]">Visualization</span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 max-w-[900px]">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 max-w-[900px]">
                 <div className="flex flex-col gap-4 items-center md:items-start text-center md:text-left">
                   <span className="text-[13px] text-[#111111] uppercase tracking-[0.2em] font-[500]">Context</span>
                   <p className="text-[16px] md:text-[18px] text-[#555555] leading-[1.7] font-[400]">
@@ -68,7 +68,7 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-10 pt-4">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 pt-4">
                 <a href={project.link} className="text-[13px] text-[#111111] uppercase tracking-[0.2em] font-[500] transition-opacity duration-300 hover:opacity-50 relative group/link">
                   View Case Study
                   <span className="absolute left-0 bottom-[-4px] w-full h-[1px] bg-[#111111] scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>

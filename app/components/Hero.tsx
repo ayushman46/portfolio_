@@ -40,11 +40,11 @@ export default function Hero() {
           transition={{ duration: 1.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-start text-left"
         >
-          <h1 className="text-[42px] md:text-[64px] lg:text-[84px] text-[#111111] leading-[0.95] max-w-[980px] mb-5 font-[400] tracking-[-0.06em]">
+          <h1 className="text-[36px] md:text-[64px] lg:text-[84px] text-[#111111] leading-[0.95] max-w-[980px] mb-4 md:mb-5 font-[400] tracking-[-0.06em]">
             Building intelligent systems<br />
             for scalable software.
           </h1>
-          <span className="text-[20px] md:text-[25px] text-[#5f5f5f] font-[500] tracking-[-0.03em] leading-[1.35] max-w-[390px]">
+          <span className="text-[18px] md:text-[25px] text-[#5f5f5f] font-[500] tracking-[-0.03em] leading-[1.35] max-w-[390px]">
             Ayushman Chakraborty
           </span>
         </motion.div>

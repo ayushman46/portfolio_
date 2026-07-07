@@ -14,11 +14,11 @@ export default function About() {
           </span>
         </div>
 
-        <h2 className="text-[40px] md:text-[56px] lg:text-[64px] text-[#111111] leading-[1.1] font-[500] max-w-[800px] mb-12 tracking-[-0.03em]">
+        <h2 className="text-[32px] md:text-[56px] lg:text-[64px] text-[#111111] leading-[1.1] font-[500] max-w-[800px] mb-12 tracking-[-0.03em]">
           Turning complex data into reliable, everyday applications.
         </h2>
 
-        <div className="flex flex-col gap-6 max-w-[680px] text-[18px] md:text-[20px] text-[#555555] leading-[1.7] font-[400] tracking-[-0.01em]">
+        <div className="flex flex-col gap-6 max-w-[680px] text-[16px] md:text-[20px] text-[#555555] leading-[1.7] font-[400] tracking-[-0.01em]">
           <p>
             I am an AI Engineer focused on the intersection of deep learning and elegant product design. My work centers on translating complex academic research into robust, scalable software architectures.
           </p>

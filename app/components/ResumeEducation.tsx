@@ -13,12 +13,12 @@ export default function ResumeEducation() {
           </span>
         </div>
 
-        <div className="flex flex-col gap-20 items-center w-full max-w-[800px]">
+        <div className="flex flex-col gap-12 md:gap-20 items-center w-full max-w-[800px]">
           <div className="flex flex-col gap-4 items-center text-center">
             <span className="text-[13px] text-[#AAAAAA] uppercase tracking-[0.2em] font-[500]">2023 — 2027</span>
-            <h3 className="text-[32px] md:text-[48px] text-[#111111] leading-[1.1] font-[500] tracking-[-0.03em]">Manipal Institute of Technology</h3>
-            <span className="text-[18px] text-[#555555] font-[400] tracking-[-0.01em]">B.Tech in Computer Science & Engineering (Data Science)</span>
-            <p className="text-[18px] md:text-[20px] text-[#555555] leading-[1.7] max-w-[600px] font-[400] mt-2">
+            <h3 className="text-[28px] md:text-[48px] text-[#111111] leading-[1.1] font-[500] tracking-[-0.03em]">Manipal Institute of Technology</h3>
+            <span className="text-[16px] md:text-[18px] text-[#555555] font-[400] tracking-[-0.01em]">B.Tech in Computer Science & Engineering (Data Science)</span>
+            <p className="text-[16px] md:text-[20px] text-[#555555] leading-[1.7] max-w-[600px] font-[400] mt-2">
               CGPA: 7.5/10. Coursework: Data Structures and Algorithms, Machine Learning, Deep Learning, Natural Language Processing, Computer Vision.
             </p>
           </div>

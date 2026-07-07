@@ -14,7 +14,7 @@ export default function Skills() {
         </div>
 
         <div className="max-w-[800px]">
-          <p className="text-[28px] md:text-[40px] text-[#111111] leading-[1.4] font-[500] tracking-[-0.02em]">
+          <p className="text-[20px] md:text-[40px] text-[#111111] leading-[1.4] font-[500] tracking-[-0.02em]">
             Python, SQL, JavaScript, FastAPI, Docker, LangChain, RAG Pipelines, Agentic Workflows, FAISS, PyTorch, XGBoost, pandas, NumPy, React, Node.js, MLflow, LangGraph.
           </p>
         </div>
