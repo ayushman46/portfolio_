@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-// Inter as substitute for PP Neue Montreal (Weight 300 acts as 350, 400 for buttons)
+// Inter as substitute for PP Neue Montreal / Unica77
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 

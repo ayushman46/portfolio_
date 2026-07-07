@@ -4,29 +4,22 @@ import React from 'react';
 
 export default function ResumeEducation() {
   return (
-    <section className="section-padding">
-      <div className="max-w-page mx-auto px-[clamp(22px,5vw,69px)] grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-[120px]">
+    <section className="py-[12vh] md:py-[18vh] flex flex-col items-center justify-center text-center">
+      <div className="max-w-page mx-auto px-[clamp(22px,5vw,69px)] flex flex-col items-center">
         
-        <div className="md:col-span-4 flex flex-col items-start pt-2">
-          <span className="text-[12px] text-ash-gray uppercase tracking-widest">Education</span>
+        <div className="mb-16">
+          <span className="text-[13px] uppercase tracking-[0.2em] text-[#888888] font-[500]">
+            Education
+          </span>
         </div>
 
-        <div className="md:col-span-8 flex flex-col gap-16">
-          <div className="flex flex-col gap-4">
-            <span className="text-[12px] text-ash-gray uppercase tracking-widest">2021 — 2023</span>
-            <h3 className="text-[24px] md:text-[28px] text-off-black leading-[1.2]">Stanford University</h3>
-            <span className="text-[16px] text-off-black">M.S. in Artificial Intelligence</span>
-            <p className="text-[16px] text-steel-gray leading-[1.6] max-w-2xl">
-              Coursework: Deep Learning, Probabilistic Graphical Models, Convex Optimization.
-            </p>
-          </div>
-          
-          <div className="flex flex-col gap-4">
-            <span className="text-[12px] text-ash-gray uppercase tracking-widest">2017 — 2021</span>
-            <h3 className="text-[24px] md:text-[28px] text-off-black leading-[1.2]">University of Washington</h3>
-            <span className="text-[16px] text-off-black">B.S. in Computer Science</span>
-            <p className="text-[16px] text-steel-gray leading-[1.6] max-w-2xl">
-              Graduated with Honors. Focus on embedded systems and high-performance computing.
+        <div className="flex flex-col gap-20 items-center w-full max-w-[800px]">
+          <div className="flex flex-col gap-4 items-center text-center">
+            <span className="text-[13px] text-[#AAAAAA] uppercase tracking-[0.2em] font-[500]">2023 — 2027</span>
+            <h3 className="text-[32px] md:text-[48px] text-[#111111] leading-[1.1] font-[500] tracking-[-0.03em]">Manipal Institute of Technology</h3>
+            <span className="text-[18px] text-[#555555] font-[400] tracking-[-0.01em]">B.Tech in Computer Science & Engineering (Data Science)</span>
+            <p className="text-[18px] md:text-[20px] text-[#555555] leading-[1.7] max-w-[600px] font-[400] mt-2">
+              CGPA: 7.5/10. Coursework: Data Structures and Algorithms, Machine Learning, Deep Learning, Natural Language Processing, Computer Vision.
             </p>
           </div>
         </div>

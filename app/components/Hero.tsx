@@ -12,11 +12,11 @@ export default function Hero() {
   return (
     <section className="min-h-[100vh] flex flex-col justify-center relative overflow-hidden">
       
-      {/* Immersive Centerpiece: Faded Image */}
-      <div className="absolute inset-0 z-[-1] flex items-center justify-center pointer-events-none">
+      {/* Immersive Centerpiece: Right-Aligned Silhouette */}
+      <div className="absolute inset-y-0 right-0 w-full md:w-[65%] flex items-center justify-end pointer-events-none z-[-1]">
         <motion.div 
           style={{ y, opacity, scale }}
-          className="relative w-full h-full flex items-center justify-center opacity-60 md:opacity-80"
+          className="relative w-full h-[90vh] flex items-center justify-end opacity-40 md:opacity-60"
         >
           <motion.img 
             initial={{ opacity: 0, filter: 'blur(20px)' }}
@@ -24,31 +24,29 @@ export default function Hero() {
             transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
             src="/hero-bg.png" 
             alt="Ayushman" 
-            className="w-full h-full max-w-[1400px] object-cover md:object-contain blur-[1px]"
+            className="w-full h-full max-w-[900px] object-contain object-right blur-[1px] md:blur-[2px]"
             style={{
-              maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 70%)',
-              WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 70%)',
+              maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 20%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 20%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%)',
             }}
           />
         </motion.div>
       </div>
 
-      <div className="max-w-page mx-auto w-full px-[clamp(22px,5vw,69px)] relative z-10 flex flex-col items-center text-center mt-[15vh]">
+      <div className="max-w-page mx-auto w-full px-[clamp(22px,5vw,69px)] relative z-10 flex flex-col justify-end pb-[10vh] h-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-center"
+          className="flex flex-col items-start text-left"
         >
-          <span className="text-[10px] md:text-[12px] text-steel-gray mb-8 tracking-widest uppercase">
+          <h1 className="text-[42px] md:text-[64px] lg:text-[84px] text-[#111111] leading-[0.95] max-w-[980px] mb-5 font-[400] tracking-[-0.06em]">
+            Building intelligent systems<br />
+            for scalable software.
+          </h1>
+          <span className="text-[20px] md:text-[25px] text-[#5f5f5f] font-[500] tracking-[-0.03em] leading-[1.35] max-w-[390px]">
             Ayushman Chakraborty
           </span>
-          <h1 className="text-[48px] md:text-[80px] text-off-black leading-[1.05] max-w-[900px] mb-8 font-[300]">
-            Building intelligent software that feels invisible.
-          </h1>
-          <p className="text-[14px] md:text-[16px] text-steel-gray max-w-[480px] leading-[1.5]">
-            AI Engineer specializing in large language models, autonomous agents, and multimodal perception. Translating complex research into elegant production systems.
-          </p>
         </motion.div>
       </div>
     </section>

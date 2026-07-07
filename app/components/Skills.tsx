@@ -4,16 +4,18 @@ import React from 'react';
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-padding">
-      <div className="max-w-page mx-auto px-[clamp(22px,5vw,69px)] grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-[120px]">
+    <section id="skills" className="py-[12vh] md:py-[18vh] flex flex-col items-center justify-center text-center bg-[#FAFAFA]">
+      <div className="max-w-page mx-auto px-[clamp(22px,5vw,69px)] flex flex-col items-center">
         
-        <div className="md:col-span-4 flex flex-col items-start pt-2">
-          <span className="text-[12px] text-ash-gray uppercase tracking-widest">Arsenal</span>
+        <div className="mb-12">
+          <span className="text-[13px] uppercase tracking-[0.2em] text-[#888888] font-[500]">
+            Arsenal
+          </span>
         </div>
 
-        <div className="md:col-span-8">
-          <p className="text-[24px] md:text-[32px] text-off-black leading-[1.6] max-w-4xl font-[300]">
-            Python, PyTorch, CUDA, LangGraph, LangChain, FastAPI, React, TypeScript, Next.js, Node.js, PostgreSQL, AWS, Docker, Kubernetes, C++, Go, Rust.
+        <div className="max-w-[800px]">
+          <p className="text-[28px] md:text-[40px] text-[#111111] leading-[1.4] font-[500] tracking-[-0.02em]">
+            Python, SQL, JavaScript, FastAPI, Docker, LangChain, RAG Pipelines, Agentic Workflows, FAISS, PyTorch, XGBoost, pandas, NumPy, React, Node.js, MLflow, LangGraph.
           </p>
         </div>
 
