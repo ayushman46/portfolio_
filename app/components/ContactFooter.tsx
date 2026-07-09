@@ -40,15 +40,15 @@ export default function ContactFooter() {
           </span>
 
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
-            <a href="https://github.com" className="text-[13px] text-[#111111] uppercase tracking-[0.2em] font-[500] transition-opacity duration-300 hover:opacity-50 relative group/link">
+            <a href="https://github.com/ayushman46" className="text-[13px] text-[#111111] uppercase tracking-[0.2em] font-[500] transition-opacity duration-300 hover:opacity-50 relative group/link">
               GitHub
               <span className="absolute left-0 bottom-[-4px] w-full h-[1px] bg-[#111111] scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </a>
-            <a href="https://linkedin.com" className="text-[13px] text-[#111111] uppercase tracking-[0.2em] font-[500] transition-opacity duration-300 hover:opacity-50 relative group/link">
+            <a href="https://www.linkedin.com/in/ayushmanchakraborty/" className="text-[13px] text-[#111111] uppercase tracking-[0.2em] font-[500] transition-opacity duration-300 hover:opacity-50 relative group/link">
               LinkedIn
               <span className="absolute left-0 bottom-[-4px] w-full h-[1px] bg-[#111111] scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </a>
-            <a href="https://twitter.com" className="text-[13px] text-[#111111] uppercase tracking-[0.2em] font-[500] transition-opacity duration-300 hover:opacity-50 relative group/link">
+            <a href="https://x.com/Im_Ayushman46" className="text-[13px] text-[#111111] uppercase tracking-[0.2em] font-[500] transition-opacity duration-300 hover:opacity-50 relative group/link">
               Twitter
               <span className="absolute left-0 bottom-[-4px] w-full h-[1px] bg-[#111111] scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </a>
