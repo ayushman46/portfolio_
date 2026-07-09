@@ -17,7 +17,7 @@ export default function Experience() {
       <div className="max-w-page mx-auto px-[clamp(22px,5vw,69px)] flex flex-col items-center">
         
         <div className="mb-16">
-          <span className="text-[13px] uppercase tracking-[0.2em] text-[#888888] font-[500]">
+          <span className="text-[14px] uppercase tracking-[0.2em] text-[#888888] font-[500] font-ultrabold">
             Experience
           </span>
         </div>
@@ -28,7 +28,7 @@ export default function Experience() {
               <div className="flex flex-col gap-3 items-center text-center">
                 <span className="text-[13px] text-[#AAAAAA] uppercase tracking-[0.2em] font-[500]">{exp.duration}</span>
                 <h3 className="text-[28px] md:text-[48px] text-[#111111] leading-[1.1] font-[500] tracking-[-0.03em]">{exp.role}</h3>
-                <span className="text-[16px] md:text-[18px] text-[#555555] font-[400] tracking-[-0.01em]">{exp.company}</span>
+                <span className="text-[16px] md:text-[18px] text-[#555555] font-[400] font-ultrabold tracking-[-0.01em]">{exp.company}</span>
               </div>
               <p className="text-[16px] md:text-[20px] text-[#555555] leading-[1.7] max-w-[680px] font-[400]">
                 {exp.description}

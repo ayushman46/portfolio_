@@ -42,9 +42,9 @@ export default function Hero() {
         >
           <h1 className="text-[36px] md:text-[64px] lg:text-[84px] text-[#111111] leading-[0.95] max-w-[980px] mb-4 md:mb-5 font-[400] tracking-[-0.06em]">
             Building intelligent systems<br />
-            for scalable software.
+            for scalable software
           </h1>
-          <span className="text-[18px] md:text-[25px] text-[#5f5f5f] font-[500] tracking-[-0.03em] leading-[1.35] max-w-[390px]">
+          <span className="text-[20px] md:text-[28px] text-[#5f5f5f] font-[500] font-ultraboldtracking-[-0.03em] leading-[1.35] max-w-[390px]">
             Ayushman Chakraborty
           </span>
         </motion.div>

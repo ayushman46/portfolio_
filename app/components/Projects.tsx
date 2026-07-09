@@ -16,7 +16,7 @@ const projects = [
     type: "Jun 2026",
     description: "A voice-based technical interview platform that scores candidates on technical skills and communication, generating automated performance reports for feedback.",
     architecture: "A real-time system built using WebSockets to stream audio and generate adaptive follow-up questions. Stack includes FastAPI, Next.js, Groq Whisper, Gemini API, and SQLAlchemy.",
-    link: "#",
+    link: "https://entrevista1.vercel.app/",
     repo: "https://github.com"
   },
   {
@@ -35,7 +35,7 @@ export default function Projects() {
       <div className="max-w-page mx-auto px-[clamp(22px,5vw,69px)] flex flex-col items-center">
         
         <div className="mb-20">
-          <span className="text-[13px] uppercase tracking-[0.2em] text-[#888888] font-[500]">
+          <span className="text-[15px] uppercase tracking-[0.2em] text-[#888888] font-[500] font-ultrabold">
             Case Studies
           </span>
         </div>
@@ -70,7 +70,7 @@ export default function Projects() {
 
               <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 pt-4">
                 <a href={project.link} className="text-[13px] text-[#111111] uppercase tracking-[0.2em] font-[500] transition-opacity duration-300 hover:opacity-50 relative group/link">
-                  View Case Study
+                  Live project link
                   <span className="absolute left-0 bottom-[-4px] w-full h-[1px] bg-[#111111] scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
                 <a href={project.repo} className="text-[13px] text-[#111111] uppercase tracking-[0.2em] font-[500] transition-opacity duration-300 hover:opacity-50 relative group/link">
