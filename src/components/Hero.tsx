@@ -58,6 +58,9 @@ export const Hero: React.FC = () => {
             <img
               src={DP}
               alt="Ayushman Chakraborty"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="h-full w-full object-cover object-[center_35%] transition-transform duration-300 group-hover:scale-105"
             />
           </div>
@@ -85,7 +88,8 @@ export const Hero: React.FC = () => {
           <span className="font-medium text-[var(--text-primary)]">
             GenAI, RAG, distributed systems & developer tools
           </span>
-          .
+          . Based in Bengaluru, I study Computer Science and Engineering
+          (Data Science) at Manipal Institute of Technology.
         </p>
       </div>
 
@@ -124,6 +128,7 @@ export const Hero: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           href="/Ayushman-Chakraborty-Resume.pdf"
+          aria-label="Download Ayushman Chakraborty's resume"
         >
           <button className="btn-pill-3d cursor-pointer">
             <HiOutlineDocumentText className="text-sm" />

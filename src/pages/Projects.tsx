@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ProjectData, type Category } from "../assets/ProjectsData";
+import { Link } from "react-router";
+import { ProjectData, projectSlug, type Category } from "../assets/ProjectsData";
 import DockNavbar from "../components/DockNavbar";
 import Footer from "../components/Footer";
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink, FiSearch, FiX } from "react-icons/fi";
 import { Skeleton } from "../components/Skeleton";
+import SEO, { PERSON_ID, SITE_URL } from "../components/SEO";
 
 const categories: ("All" | Category)[] = [
   "All",
@@ -108,6 +110,29 @@ export const Projects: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] antialiased">
+      <SEO
+        title="Projects | Ayushman Chakraborty"
+        description="Explore Ayushman Chakraborty's AI, backend, data engineering, computer vision and full-stack projects, including CodeGlyph, Prepvia and ReleaseLens."
+        path="/projects"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "@id": `${SITE_URL}/projects#page`,
+          name: "Projects | Ayushman Chakraborty",
+          url: `${SITE_URL}/projects`,
+          isPartOf: { "@id": `${SITE_URL}/#website` },
+          about: { "@id": PERSON_ID },
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: ProjectData.map((project, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: project.heading,
+              url: `${SITE_URL}/projects/${projectSlug(project)}`,
+            })),
+          },
+        }}
+      />
       <main className="page">
         {/* Page Header */}
         <div className="page-col mb-5">
@@ -209,7 +234,9 @@ export const Projects: React.FC = () => {
               >
                 <img
                   src={project.image}
-                  alt={project.heading}
+                  alt={`${project.heading} project interface by Ayushman Chakraborty`}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover object-top opacity-70 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105"
                 />
                 {project.liveLink && (
@@ -229,9 +256,12 @@ export const Projects: React.FC = () => {
               <div className="mt-3 flex flex-col gap-1.5 flex-1 justify-between">
                 <div>
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-sm font-semibold text-[var(--text-primary)] transition-colors">
+                    <Link
+                      to={`/projects/${projectSlug(project)}`}
+                      className="text-sm font-semibold text-[var(--text-primary)] transition-colors hover:underline"
+                    >
                       {project.heading}
-                    </span>
+                    </Link>
 
                     <div className="flex items-center gap-2 text-[var(--text-muted)]">
                       {project.github && (

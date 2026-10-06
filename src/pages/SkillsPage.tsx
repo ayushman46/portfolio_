@@ -1,6 +1,7 @@
 import React from "react";
 import DockNavbar from "../components/DockNavbar";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 import {
   FaReact,
@@ -166,6 +167,11 @@ const skillCategories: SkillCategory[] = [
 export const SkillsPage: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] antialiased">
+      <SEO
+        title="Skills | Ayushman Chakraborty"
+        description="Ayushman Chakraborty's technical skills across Python, TypeScript, FastAPI, React, Next.js, RAG, AI agents, data engineering, databases and DevOps."
+        path="/skills"
+      />
       <main className="page">
 
         {/* Page Header */}

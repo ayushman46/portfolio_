@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import DockNavbar from "../components/DockNavbar";
+import SEO from "../components/SEO";
 
 export const NotFound: React.FC = () => {
   return (
@@ -19,6 +20,11 @@ export const NotFound: React.FC = () => {
         antialiased
       "
     >
+      <SEO
+        title="Page Not Found | Ayushman Chakraborty"
+        description="The requested page could not be found on Ayushman Chakraborty's portfolio."
+        noindex
+      />
       {/* 404 Content */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

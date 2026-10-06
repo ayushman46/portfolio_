@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Ayushman Chakraborty - AI Engineer and Software Developer</title>
+  <desc id="description">Personal portfolio of Ayushman Chakraborty, an AI, backend and data engineer in Bengaluru.</desc>
+  <rect width="1200" height="630" fill="#0a0b0c"/>
+  <circle cx="1050" cy="90" r="220" fill="#1c332d" opacity="0.8"/>
+  <circle cx="150" cy="600" r="270" fill="#171d34" opacity="0.9"/>
+  <path d="M96 112h1008" stroke="#2d2e2f" stroke-width="2"/>
+  <text x="96" y="212" fill="#8b8d91" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">AYUSHMAN CHAKRABORTY</text>
+  <text x="96" y="315" fill="#ededed" font-family="Arial, sans-serif" font-size="68" font-weight="700">AI Engineer &amp;</text>
+  <text x="96" y="395" fill="#ededed" font-family="Arial, sans-serif" font-size="68" font-weight="700">Software Developer</text>
+  <text x="96" y="488" fill="#8b8d91" font-family="Arial, sans-serif" font-size="26">Production AI systems · Backend APIs · Data Engineering</text>
+  <rect x="96" y="535" width="190" height="5" rx="2.5" fill="#10b981"/>
+</svg>

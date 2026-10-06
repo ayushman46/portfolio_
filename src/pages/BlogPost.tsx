@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router";
 import { motion } from "motion/react";
 import DockNavbar from "../components/DockNavbar";
+import SEO from "../components/SEO";
 
 interface Blog {
   slug: string;
@@ -61,6 +62,20 @@ const BlogPost: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] antialiased">
+      <SEO
+        title={`${blog.title} | Ayushman Chakraborty`}
+        description={blog.description}
+        path={`/blogs/${blog.slug}`}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: blog.title,
+          description: blog.description,
+          datePublished: "2026-10-02",
+          author: { "@id": "https://ayushmanchakraborty.vercel.app/#person" },
+          mainEntityOfPage: `https://ayushmanchakraborty.vercel.app/blogs/${blog.slug}`,
+        }}
+      />
       <main className="page pb-32">
         <motion.article
           initial={{

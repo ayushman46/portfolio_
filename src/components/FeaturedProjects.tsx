@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router";
-import { ProjectData } from "../assets/ProjectsData";
+import { ProjectData, projectSlug } from "../assets/ProjectsData";
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import { Skeleton } from "./Skeleton";
@@ -89,7 +89,9 @@ export const FeaturedProjects: React.FC = () => {
             <div className="z-10 h-44 min-h-44 overflow-hidden rounded-md border border-[var(--border-color)] bg-[var(--pill-bg)] relative">
               <img
                 src={project.image}
-                alt={project.heading}
+                alt={`${project.heading} project interface by Ayushman Chakraborty`}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover object-top opacity-70 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105"
               />
               {project.liveLink && (
@@ -107,9 +109,12 @@ export const FeaturedProjects: React.FC = () => {
             {/* Project Meta */}
             <div className="mt-3 flex flex-col gap-1.5">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-sm font-semibold text-[var(--text-primary)] transition-colors">
+                <Link
+                  to={`/projects/${projectSlug(project)}`}
+                  className="text-sm font-semibold text-[var(--text-primary)] transition-colors hover:underline"
+                >
                   {project.heading}
-                </span>
+                </Link>
 
                 <div className="flex items-center gap-2 text-[var(--text-muted)]">
                   {project.github && (

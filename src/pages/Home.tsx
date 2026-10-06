@@ -7,6 +7,7 @@ import SocialLinks from "../components/SocialLinks";
 import FeaturedProjects from "../components/FeaturedProjects";
 import Footer from "../components/Footer";
 import DockNavbar from "../components/DockNavbar";
+import SEO from "../components/SEO";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -24,6 +25,11 @@ const sectionVariants = {
 export const Home: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] antialiased">
+      <SEO
+        title="Ayushman Chakraborty | AI Engineer & Software Developer"
+        description="Ayushman Chakraborty is an AI engineer and software developer in Bengaluru building production AI systems, data pipelines, APIs and open source projects."
+        path="/"
+      />
       <main className="page">
         <motion.div
           custom={0}

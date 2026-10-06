@@ -66,6 +66,7 @@ export const SocialLinks: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               href={s.href}
+              aria-label={`Ayushman Chakraborty on ${s.name}`}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}

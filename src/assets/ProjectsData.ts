@@ -28,6 +28,9 @@ export interface Project {
   category: Category;
 }
 
+export const projectSlug = (project: Project) =>
+  project.heading.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
 export const ProjectData: Project[] = [
   {
     image: releaseLensPreview,

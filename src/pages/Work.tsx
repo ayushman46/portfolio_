@@ -1,6 +1,7 @@
 import React from "react";
 import DockNavbar from "../components/DockNavbar";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 interface WorkExperience {
   company: string;
@@ -73,6 +74,11 @@ const workData: WorkExperience[] = [
 export const Work: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] antialiased">
+      <SEO
+        title="Work & Experience | Ayushman Chakraborty"
+        description="Ayushman Chakraborty's experience across Wipro enterprise AI, TraininGenie full-stack development, open source contributions and MIT Bengaluru."
+        path="/work"
+      />
       <main className="page">
         {/* Page Header */}
         <div className="page-col mb-5">

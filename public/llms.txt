@@ -1,0 +1,30 @@
+# Ayushman Chakraborty
+
+> AI, backend and data engineer based in Bengaluru, India.
+
+## Portfolio
+
+https://ayushmanchakraborty.vercel.app/
+
+This is the personal portfolio of Ayushman Chakraborty. It covers AI engineering, backend development, data engineering, machine learning, full-stack products, computer vision and open source software.
+
+## Profiles
+
+- GitHub: https://github.com/ayushman46
+- LinkedIn: https://www.linkedin.com/in/ayushmanchakraborty
+
+## Projects
+
+- ReleaseLens: https://ayushmanchakraborty.vercel.app/projects/releaselens
+- CodeGlyph: https://ayushmanchakraborty.vercel.app/projects/codeglyph
+- Prepvia: https://ayushmanchakraborty.vercel.app/projects/prepvia
+- Seamly: https://ayushmanchakraborty.vercel.app/projects/seamly
+- StrideCircle: https://ayushmanchakraborty.vercel.app/projects/stridecircle
+
+## Experience and education
+
+- Software Engineering and Generative AI Intern at Wipro Limited.
+- Software Development Intern at TraininGenie.
+- B.Tech Computer Science and Engineering (Data Science) at Manipal Institute of Technology, Bengaluru.
+
+See the work page for the complete experience timeline: https://ayushmanchakraborty.vercel.app/work

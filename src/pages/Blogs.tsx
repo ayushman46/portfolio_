@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router";
 import DockNavbar from "../components/DockNavbar";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
 
 interface BlogPost {
   slug: string;
@@ -43,6 +44,11 @@ const sectionVariants = {
 export const Blogs: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] antialiased">
+      <SEO
+        title="Blog | Ayushman Chakraborty"
+        description="Engineering notes from Ayushman Chakraborty on AI systems, data engineering, AIOps, software development and projects in progress."
+        path="/blogs"
+      />
       <main className="page">
         <motion.div
           initial="hidden"

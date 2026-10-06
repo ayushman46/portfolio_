@@ -7,6 +7,7 @@ import "./index.css";
 import App from "./App";
 import Work from "./pages/Work";
 import Projects from "./pages/Projects";
+import ProjectDetail from "./pages/ProjectDetail";
 import SkillsPage from "./pages/SkillsPage";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
@@ -28,6 +29,7 @@ createRoot(document.getElementById("root")!).render(
 
           {/* Projects */}
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
 
           {/* Skills */}
           <Route path="/skills" element={<SkillsPage />} />
