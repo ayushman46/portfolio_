@@ -1,0 +1,155 @@
+/* ---------- LED credentials board (fx/LedBoard.tsx) ----------
+   Dot-matrix sign above the footer signature. Emerald only on lit diodes and
+   award chips; everything else is the neutral ink. */
+
+.led {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  min-width: 0;
+}
+
+.led-head {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.led-head > .leader {
+  margin: 0 0.75rem;
+}
+
+/* mirrors .pc-marquee-toggle (styles/home-b.css) */
+.led-toggle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  min-width: 2.5rem;
+  justify-content: flex-end;
+  margin: -0.5rem 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  white-space: pre;
+  color: var(--text-muted);
+  transition: color 0.2s var(--ease-out, ease);
+}
+
+.led-toggle:hover {
+  color: var(--text-primary);
+}
+
+.led-frame {
+  padding: 0.625rem 0.75rem;
+  overflow: hidden;
+}
+
+.led-canvas {
+  display: block;
+  width: 100%;
+  height: 36px; /* 9 rows × 4px pitch; JS sets the exact value */
+}
+
+@media (min-width: 640px) {
+  .led-frame {
+    padding: 0.875rem 1rem;
+  }
+  .led-canvas {
+    height: 54px; /* 9 rows × 6px pitch */
+  }
+}
+
+/* ---------- accessible list ---------- */
+
+.led-list > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.2s var(--ease-out, ease);
+}
+
+.led-list > summary::-webkit-details-marker {
+  display: none;
+}
+
+.led-list > summary::before {
+  content: "+";
+  display: inline-block;
+  width: 0.75em;
+  font-family: var(--font-jetbrains-mono);
+  color: var(--text-muted);
+}
+
+.led-list[open] > summary::before {
+  content: "−";
+}
+
+.led-list > summary:hover {
+  color: var(--text-primary);
+}
+
+.led-list ul {
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px dashed var(--border-dashed);
+}
+
+.led-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem 0.625rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--border-dashed);
+  min-width: 0;
+}
+
+.led-list .chip {
+  min-width: 3.25rem;
+  justify-content: center;
+}
+
+.led-label {
+  flex: 1 1 12rem;
+  min-width: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--text-body, var(--text-primary));
+  overflow-wrap: anywhere;
+}
+
+.led-verify {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  margin: -0.5rem 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--border-dashed);
+  text-underline-offset: 3px;
+  transition: color 0.2s var(--ease-out, ease);
+}
+
+.led-verify:hover {
+  color: var(--text-primary);
+  text-decoration-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .led-toggle {
+    display: none !important;
+  }
+  .led-toggle,
+  .led-list > summary,
+  .led-verify {
+    transition: none;
+  }
+}

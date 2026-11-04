@@ -1,0 +1,362 @@
+/* =========================================================
+   SIGNAL PATH — live blueprint schematics (fx/SignalPath.tsx)
+   Emerald only on packets, lit nodes and metric chips.
+   ========================================================= */
+
+.sp {
+  min-width: 0;
+}
+
+/* ---------- tabs ---------- */
+
+.sp-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: -0.5rem 0 0.75rem;
+}
+
+.sp-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5ch;
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: color 0.2s var(--ease-out, ease);
+}
+
+.sp-tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  height: 1px;
+  background: var(--accent-strong);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.24s var(--ease-out, ease);
+}
+
+.sp-tab[aria-selected="true"] {
+  color: var(--text-primary);
+}
+
+.sp-tab[aria-selected="true"]::after {
+  transform: scaleX(1);
+}
+
+.sp-tab-n {
+  color: var(--text-subtle);
+}
+
+@media (hover: hover) {
+  .sp-tab:hover {
+    color: var(--text-primary);
+  }
+}
+
+.sp-tab:focus-visible {
+  outline: 1px dashed var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- plate ---------- */
+
+.sp-panel {
+  animation: sp-fade 160ms var(--ease-out, ease) both;
+}
+
+@keyframes sp-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.sp-plate {
+  margin: 0;
+  padding: 0.75rem 0.25rem 0;
+  overflow: hidden;
+}
+
+.sp-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  margin: 0 auto;
+  overflow: visible;
+  font-family: var(--font-jetbrains-mono);
+}
+
+.sp-plate[data-wide] .sp-svg {
+  max-width: none;
+}
+
+.sp-dot {
+  fill: var(--tick);
+  opacity: 0.7;
+}
+
+.sp-wire {
+  fill: none;
+  /* --border-dashed vanishes as a 1px dashed line on --card-bg; mix from the subtle ink instead */
+  stroke: color-mix(in srgb, var(--text-subtle) 55%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.sp-node rect {
+  fill: var(--card-bg);
+  stroke: var(--border-dashed);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+html.light .sp-node rect {
+  stroke: var(--rule-strong);
+}
+
+.sp-label {
+  fill: var(--text-primary);
+}
+
+.sp-id {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  fill: var(--text-subtle);
+}
+
+.sp-node--metric rect {
+  fill: var(--accent-soft);
+  stroke: var(--accent-line);
+}
+
+.sp-node--metric .sp-label {
+  fill: var(--accent);
+}
+
+.sp-chip rect {
+  fill: var(--accent-soft);
+  stroke: var(--accent-line);
+  vector-effect: non-scaling-stroke;
+}
+
+.sp-chip text {
+  fill: var(--accent);
+}
+
+/* ---------- motion: one cascade per cycle, CSS only ---------- */
+
+.sp-pkt {
+  fill: var(--accent-strong);
+  offset-rotate: 0deg;
+  offset-distance: 0%;
+  opacity: 0;
+  animation: sp-run var(--cycle, 3.6s) linear infinite;
+  animation-delay: calc(var(--i) * 0.6s);
+}
+
+/* each wire carries its packet for 0.6s of the cycle (6 slots = 3.6s, 7 slots = 4.2s), then idles hidden */
+.sp-plate[data-slots="7"] .sp-pkt {
+  animation-name: sp-run-7;
+}
+
+@keyframes sp-run {
+  0% {
+    offset-distance: 0%;
+    opacity: 1;
+  }
+  16.6% {
+    offset-distance: 100%;
+    opacity: 1;
+  }
+  16.7%,
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes sp-run-7 {
+  0% {
+    offset-distance: 0%;
+    opacity: 1;
+  }
+  14.2% {
+    offset-distance: 100%;
+    opacity: 1;
+  }
+  14.3%,
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+.sp-node rect {
+  animation: sp-lit var(--cycle, 3.6s) ease-out infinite;
+  animation-delay: calc(var(--i) * 0.6s);
+}
+
+.sp-node--metric rect {
+  animation: none;
+}
+
+@keyframes sp-lit {
+  0%,
+  12% {
+    stroke: var(--accent-strong);
+    fill: var(--accent-soft);
+  }
+  30%,
+  100% {
+    stroke: var(--border-dashed);
+    fill: var(--card-bg);
+  }
+}
+
+html.light .sp-node:not(.sp-node--metric) rect {
+  animation-name: sp-lit-light;
+}
+
+@keyframes sp-lit-light {
+  0%,
+  12% {
+    stroke: var(--accent-strong);
+    fill: var(--accent-soft);
+  }
+  30%,
+  100% {
+    stroke: var(--rule-strong);
+    fill: var(--card-bg);
+  }
+}
+
+/* nothing animates while the plate is off screen */
+.sp-plate:not([data-run]) * {
+  animation-play-state: paused !important;
+}
+
+.sp-plate[data-nopkt] .sp-pkt {
+  display: none;
+}
+
+/* wires draw on once per reveal / tab switch, then settle to dashes */
+.sp-plate[data-draw] .sp-wire {
+  stroke-dasharray: var(--len) var(--len);
+  animation: sp-draw 600ms var(--ease-out, ease) both;
+}
+
+@keyframes sp-draw {
+  from {
+    stroke-dashoffset: var(--len);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------- caption ---------- */
+
+.sp-cap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.625rem 0.75rem 0.5rem;
+  border-top: 1px dashed var(--border-dashed);
+}
+
+.sp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sp-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 1rem;
+  margin: 0;
+}
+
+.sp-summary-text {
+  min-width: 0;
+  flex: 1 1 16rem;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+}
+
+.sp-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4ch;
+  min-height: 40px;
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: color 0.2s var(--ease-out, ease);
+}
+
+@media (hover: hover) {
+  .sp-open:hover {
+    color: var(--text-primary);
+  }
+}
+
+.sp-open:focus-visible {
+  outline: 1px dashed var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (min-width: 640px) {
+  .sp-plate {
+    padding: 1rem 0.5rem 0;
+  }
+  .sp-cap {
+    padding: 0.625rem 1rem 0.5rem;
+  }
+}
+
+/* ---------- reduced motion: still, every node lit ---------- */
+
+.sp-plate[data-still] .sp-pkt {
+  display: none;
+}
+
+.sp-plate[data-still] .sp-node rect {
+  animation: none;
+  stroke: var(--accent-line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-pkt {
+    display: none;
+  }
+  .sp-node rect,
+  .sp-plate[data-draw] .sp-wire,
+  .sp-panel {
+    animation: none !important;
+  }
+  .sp-plate .sp-node rect {
+    stroke: var(--accent-line);
+  }
+  .sp-plate[data-draw] .sp-wire {
+    stroke-dasharray: 3 3;
+  }
+  .sp-tab::after {
+    transition: none;
+  }
+}

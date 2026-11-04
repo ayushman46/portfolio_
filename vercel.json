@@ -1,4 +1,10 @@
 {
+  "redirects": [
+    { "source": "/projects/autoblog", "destination": "/projects", "permanent": true },
+    { "source": "/projects/bill-split-ai", "destination": "/projects", "permanent": true },
+    { "source": "/projects/machine-learning-projects", "destination": "/projects", "permanent": true },
+    { "source": "/projects/ai-data-experiments", "destination": "/projects", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

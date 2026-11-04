@@ -1,0 +1,79 @@
+/* =========================================================
+   HOME-B — project cards (§04 Featured Projects and /projects),
+   §07 Tech Stack, §08 Right Now.
+   Only what Tailwind can't say cleanly lives here; every rule is pc- prefixed.
+   ========================================================= */
+
+/* ---------- screenshot treatment ----------
+   Invisible until decoded (the Doto nameplate shows in its place).
+   Hover devices see it monochrome at rest (full opacity, so a light-themed
+   shot never reads as disabled), and in full colour on hover or while
+   anything in the card has keyboard focus. Touch screens always get full
+   colour. Opacity and filter only: the screenshot never zooms. */
+
+.pc-shot {
+  opacity: 0;
+  transition:
+    opacity 0.3s var(--ease-out),
+    filter 0.3s var(--ease-out);
+}
+
+.pc-shot[data-loaded] {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .pc-shot[data-loaded] {
+    opacity: 1;
+    filter: grayscale(0.6) contrast(0.98);
+  }
+
+  .group:hover .pc-shot[data-loaded],
+  .group:focus-within .pc-shot[data-loaded] {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+/* ---------- empty frame ----------
+   Before the screenshot decodes, the frame shows a faint dashed grid behind
+   the Doto nameplate, so the card never reads as an empty box. Static: no shimmer. */
+
+.pc-thumb {
+  background-color: var(--card-bg);
+  background-image:
+    linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+}
+
+/* ---------- thumbnail focus ----------
+   The thumb clips its contents, so the preview button's own ring would be cut
+   off. Draw the standard ring on the frame instead (where :has() exists). */
+
+@supports selector(:has(*)) {
+  .pc-thumb:has(> .pc-thumb-hit:focus-visible) {
+    outline: 1.5px solid var(--text-primary);
+    outline-offset: 2px;
+  }
+
+  .pc-thumb-hit:focus-visible {
+    outline: none;
+  }
+}
+
+/* ---------- §07 marquee pause toggle ----------
+   Hover and focus-within pause a row (index.css); this is the explicit control
+   for everyone else. Under reduced motion the rows are a static wrapped list,
+   so the toggle has nothing to do. */
+
+.pc-marquees[data-paused] .marquee__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-marquee-toggle {
+    display: none !important;
+  }
+}

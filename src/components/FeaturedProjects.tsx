@@ -1,159 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router";
-import { ProjectData, projectSlug } from "../assets/ProjectsData";
-import { FaGithub } from "react-icons/fa";
-import { FiExternalLink } from "react-icons/fi";
-import { Skeleton } from "./Skeleton";
+import { ProjectData } from "../data/projects";
+import ProjectCard from "./ProjectCard";
+import AsciiScramble from "./AsciiScramble";
 
-const ProjectCardSkeleton: React.FC = () => (
-  <div className="flex flex-col rounded-lg border border-dashed border-[var(--border-dashed)] bg-[var(--card-bg)] p-2.5 shadow-sm">
-    <Skeleton className="h-44 min-h-44 rounded-md" />
-    <div className="mt-3 flex flex-col gap-1.5">
-      <div className="flex items-center justify-between gap-2">
-        <Skeleton className="h-4 w-28" />
-        <Skeleton className="h-4 w-16" />
-      </div>
-      <Skeleton className="h-3 w-full" />
-      <Skeleton className="h-3 w-3/4" />
-      <div className="flex flex-wrap gap-1 mt-1 pt-1">
-        <Skeleton className="h-4 w-12 rounded" />
-        <Skeleton className="h-4 w-14 rounded" />
-        <Skeleton className="h-4 w-10 rounded" />
-      </div>
-    </div>
-  </div>
-);
+const featured = ProjectData.slice(0, 4);
 
-const FeaturedProjectsSkeleton: React.FC = () => (
-  <div className="box flex flex-col gap-3">
-    <div className="flex items-center justify-between">
-      <Skeleton className="h-4 w-24" />
-      <Skeleton className="h-3 w-20" />
-    </div>
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-      {Array.from({ length: 4 }).map((_, i) => (
-        <ProjectCardSkeleton key={i} />
-      ))}
-    </div>
-  </div>
-);
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export const FeaturedProjects: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <FeaturedProjectsSkeleton />;
-  }
-
-  const featured = ProjectData.slice(0, 4);
-
   return (
-    <div className="box flex flex-col gap-3">
-      <div className="flex items-center justify-between">
-        <span className="text-sm text-[var(--text-muted)]">
-          Featured <span className="font-medium text-[var(--text-primary)]">Projects</span>
+    <section aria-labelledby="sec-projects">
+      <header className="sec-head">
+        <span className="sec-index" aria-hidden>
+          §04
         </span>
-        <Link
-          to="/projects"
-          className="jetbrains-mono text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200"
-        >
-          View all ({ProjectData.length}) →
+        <h2 id="sec-projects" className="sec-title">
+          <span className="sec-title-muted">Featured</span> Projects
+        </h2>
+        <span className="leader" aria-hidden />
+        <Link to="/projects" className="sec-action">
+          <AsciiScramble text={`View all (${ProjectData.length}) →`} />
         </Link>
-      </div>
+      </header>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {/* 1024px+: a lead row, then three cards. 640–1023: the lead is a normal card in a 2×2. Phones: one column. */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
         {featured.map((project, idx) => (
           <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 16 }}
+            key={project.slug}
+            className={idx === 0 ? "lg:col-span-3" : undefined}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
-            transition={{ delay: idx * 0.08, duration: 0.4, ease: "easeOut" }}
-            whileHover={{ y: -3 }}
-            className="group relative flex flex-col rounded-lg border border-dashed border-[var(--border-dashed)] hover:border-[var(--text-muted)] bg-[var(--card-bg)] p-2.5 transition-all duration-300 shadow-sm"
+            transition={{ delay: idx * 0.06, duration: 0.5, ease: EASE }}
           >
-            {/* Corner hover crosshairs */}
-            <div className="pointer-events-none absolute inset-0 z-10 -m-px opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute -left-px -top-px h-2 w-2 border-l border-t border-[var(--text-primary)]" />
-              <div className="absolute -right-px -top-px h-2 w-2 border-r border-t border-[var(--text-primary)]" />
-              <div className="absolute -bottom-px -right-px h-2 w-2 border-b border-r border-[var(--text-primary)]" />
-              <div className="absolute -bottom-px -left-px h-2 w-2 border-b border-l border-[var(--text-primary)]" />
-            </div>
-
-            {/* Project Image Preview */}
-            <div className="z-10 h-44 min-h-44 overflow-hidden rounded-md border border-[var(--border-color)] bg-[var(--pill-bg)] relative">
-              <img
-                src={project.image}
-                alt={`${project.heading} project interface by Ayushman Chakraborty`}
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover object-top opacity-70 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105"
-              />
-              {project.liveLink && (
-                <a
-                  href={project.liveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute top-2.5 right-2.5 p-1.5 rounded-md bg-black/70 backdrop-blur-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:text-white hover:bg-black"
-                >
-                  <FiExternalLink className="text-xs" />
-                </a>
-              )}
-            </div>
-
-            {/* Project Meta */}
-            <div className="mt-3 flex flex-col gap-1.5">
-              <div className="flex items-center justify-between gap-2">
-                <Link
-                  to={`/projects/${projectSlug(project)}`}
-                  className="text-sm font-semibold text-[var(--text-primary)] transition-colors hover:underline"
-                >
-                  {project.heading}
-                </Link>
-
-                <div className="flex items-center gap-2 text-[var(--text-muted)]">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-[var(--text-primary)] transition-colors"
-                      title="View Source on GitHub"
-                    >
-                      <FaGithub className="text-xs" />
-                    </a>
-                  )}
-                  <span className="jetbrains-mono text-[10px] rounded px-1.5 py-0.5 bg-[var(--badge-subtle-bg)] text-[var(--badge-subtle-text)] border border-[var(--badge-subtle-border)]">
-                    {project.category}
-                  </span>
-                </div>
-              </div>
-
-              <p className="jetbrains-mono line-clamp-2 text-xs tracking-tight text-[var(--text-muted)] leading-relaxed">
-                {project.description}
-              </p>
-
-              {/* Tech Stack Badges */}
-              <div className="flex flex-wrap gap-1 mt-1 pt-1">
-                {project.techStack?.slice(0, 3).map((tech, i) => (
-                  <span
-                    key={i}
-                    className="jetbrains-mono text-[9px] px-1.5 py-0.5 rounded bg-[var(--badge-subtle-bg)] text-[var(--badge-subtle-text)] border border-[var(--badge-subtle-border)]"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
+            {/* the first row is near the fold: load those screenshots eagerly so they never paint blank */}
+            <ProjectCard
+              project={project}
+              variant={idx === 0 ? "lead" : "default"}
+              maxTech={3}
+              priority={idx < 2}
+              headingAs="h3"
+            />
           </motion.div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

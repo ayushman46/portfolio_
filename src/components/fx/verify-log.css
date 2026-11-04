@@ -1,0 +1,358 @@
+/* =========================================================
+   VERIFY LOG — CI-style ledger of proof (/skills)
+   Emerald only on ✓, PASS and the progress fill.
+   ========================================================= */
+
+.vl-term {
+  overflow: hidden;
+  transition: border-color 0.2s var(--ease-out, ease);
+}
+
+@media (hover: hover) {
+  .vl-term:hover {
+    border-color: var(--text-muted);
+  }
+}
+
+.vl-bar {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+/* ---------- progress: 2px track, accent fill scaled on X ---------- */
+
+.vl-progress {
+  position: relative;
+  width: 56px;
+  height: 2px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 1px;
+  background: var(--border-color);
+}
+
+.vl-progress-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-strong);
+  transform-origin: left center;
+  transition: transform 120ms linear;
+}
+
+/* ---------- log body ---------- */
+
+.vl-log {
+  margin: 0;
+  padding: 0.75rem 0.875rem 0.875rem;
+  list-style: none;
+  font-size: 11.5px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 640px) {
+  .vl-log {
+    padding: 0.875rem 1rem 1rem;
+    font-size: 12px;
+  }
+}
+
+.vl-line {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 0.28s var(--ease-out, ease),
+    transform 0.28s var(--ease-out, ease);
+}
+
+.vl-line.is-on,
+.vl-line:focus-within {
+  opacity: 1;
+  transform: none;
+}
+
+.vl-cmd {
+  margin-bottom: 0.375rem;
+  color: var(--text-primary);
+}
+
+.vl-prompt {
+  color: var(--text-subtle);
+}
+
+/* [stage n/4] name ·············· 2/2 */
+.vl-stage {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.625rem;
+  font-size: 12px;
+  color: var(--text-subtle);
+}
+
+.vl-cmd + .vl-stage {
+  margin-top: 0.25rem;
+}
+
+.vl-stage-count {
+  white-space: nowrap;
+}
+
+/* ---------- a check row ---------- */
+
+.vl-check {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0;
+  padding-left: 1ch;
+  margin-left: -0.375rem;
+  margin-right: -0.375rem;
+  padding-right: 0.375rem;
+  border-radius: 3px;
+}
+
+@media (hover: hover) {
+  .vl-check.is-on:hover {
+    background: color-mix(in srgb, var(--text-primary) 4%, transparent);
+  }
+}
+
+.vl-glyph {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 2ch;
+  color: var(--accent);
+}
+
+.vl-check[data-status="pending"] .vl-glyph {
+  color: var(--text-subtle);
+}
+
+.vl-check[data-status="pending"] .vl-g {
+  display: inline-block;
+  animation: vl-breathe 2.4s ease-in-out infinite;
+}
+
+/* braille spinner for 120ms, then the settled glyph */
+.vl-glyph[data-spin] > .vl-g {
+  visibility: hidden;
+}
+
+.vl-glyph[data-spin]::before {
+  content: "⠋";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--text-subtle);
+  animation: vl-spin 120ms steps(1) forwards;
+}
+
+@keyframes vl-spin {
+  0% {
+    content: "⠋";
+  }
+  25% {
+    content: "⠙";
+  }
+  50% {
+    content: "⠹";
+  }
+  75%,
+  100% {
+    content: "⠸";
+  }
+}
+
+@keyframes vl-breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.vl-label {
+  min-width: 0;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+/* label-as-link: overrides .mono-link's muted, nowrap, 12px defaults so it reads as a label */
+.vl-check .vl-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--text-primary);
+  white-space: normal;
+  text-decoration: underline;
+  text-decoration-color: var(--border-dashed);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s var(--ease-out, ease);
+}
+
+@media (hover: hover) {
+  .vl-check .vl-link:hover {
+    color: var(--text-primary);
+    text-decoration-color: var(--text-primary);
+  }
+}
+
+.vl-check .vl-link:focus-visible,
+.vl-arrow:focus-visible {
+  outline: 1.5px solid var(--text-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* below 640px: no leader; meta drops onto its own line, indented under the label */
+.vl-leader {
+  display: none;
+}
+
+.vl-meta {
+  flex-basis: 100%;
+  min-width: 0;
+  /* glyph column (2ch) + 1.5ch indent under the label */
+  padding-left: 3.5ch;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.vl-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  margin-left: auto;
+  color: var(--text-subtle);
+  text-decoration: none;
+  transition:
+    color 0.2s var(--ease-out, ease),
+    transform 0.2s var(--ease-out, ease);
+}
+
+/* on phones the arrow sits on the label's line, so the meta stays the row's second line */
+@media (max-width: 639.98px) {
+  .vl-arrow {
+    order: 1;
+  }
+  .vl-meta {
+    order: 2;
+  }
+}
+
+@media (hover: hover) {
+  .vl-check:hover .vl-arrow {
+    color: var(--text-primary);
+    transform: translate(1px, -1px);
+  }
+}
+
+@media (min-width: 640px) {
+  .vl-check {
+    flex-wrap: nowrap;
+  }
+  .vl-check .vl-link {
+    min-height: 0;
+  }
+  .vl-label {
+    flex-shrink: 0;
+    max-width: 50%;
+  }
+  .vl-leader {
+    display: block;
+    align-self: center;
+    margin: 0 0.75rem;
+  }
+  .vl-meta {
+    flex-basis: auto;
+    flex-shrink: 1;
+    padding-left: 0;
+    text-align: right;
+  }
+  .vl-arrow {
+    min-width: 0;
+    min-height: 0;
+    margin-left: 0.625rem;
+    width: 1.5ch;
+  }
+  /* rows without a link keep the same right edge as rows with one */
+  .vl-check:not(:has(.vl-arrow))::after {
+    content: "";
+    flex-shrink: 0;
+    width: calc(1.5ch + 0.625rem);
+  }
+}
+
+/* ---------- rule + summary ---------- */
+
+.vl-rule {
+  margin-top: 0.625rem;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--border-dashed);
+  line-height: 1;
+}
+
+.vl-summary {
+  margin-top: 0.5rem;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+.vl-pass {
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+.vl-caret {
+  margin-left: 0.5ch;
+}
+
+/* ---------- reduced motion: everything printed, nothing moves ---------- */
+
+.vl-term[data-reduce] .vl-line,
+.vl-term[data-reduce] .vl-progress-fill {
+  transition: none;
+  transform: none;
+}
+
+.vl-term[data-reduce] .vl-progress-fill {
+  transform: scaleX(1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vl-line {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .vl-progress-fill {
+    transition: none;
+  }
+  .vl-check[data-status="pending"] .vl-g,
+  .vl-term .vl-caret {
+    animation: none;
+  }
+  .vl-check[data-status="pending"] .vl-g {
+    opacity: 0.7;
+  }
+  .vl-glyph[data-spin]::before {
+    content: none;
+  }
+  .vl-glyph[data-spin] > .vl-g {
+    visibility: visible;
+  }
+  .vl-arrow {
+    transition: none;
+  }
+}

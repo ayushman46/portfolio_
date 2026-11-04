@@ -1,157 +1,96 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { motion } from "motion/react";
-import DockNavbar from "../components/DockNavbar";
 import SEO from "../components/SEO";
+import "../styles/inner.css";
+
+const ART_404 = String.raw`         :*####:      :=**##**=:             =****-
+        +%@@@@@:    :#%%%%##%%%%*.         :*#####=
+      -%@@%%%%%:   .%%%%#:  -###%#.      .+###***#=
+    :#@@%+=%%%%:   +%##%+    +####=    .=###+-****=
+  .+%%%*: -%##%:   *###%-    =#**#+   -*#*+:  ****-
+ =%%%#=. .=%###-.  +####-    =#**#+ :+***=.  .+*+*=
+.%%%%###%########= =#**#=    =****- =****+***++++++++
+ **********####**= .*#***:  :*****. -++++++++++++++==
+          -####:    .+**********+.           .++++-
+          :+===.      .-==++==-.              ----:`;
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const suggestions = [
+  { to: "/work", label: "~/work" },
+  { to: "/projects", label: "~/projects" },
+  { to: "/blogs", label: "~/blogs" },
+];
 
 export const NotFound: React.FC = () => {
+  const { pathname } = useLocation();
+  const shown = pathname.length > 32 ? `${pathname.slice(0, 32)}…` : pathname;
+
   return (
-    <div
-      className="
-        relative
-        min-h-screen
-        bg-[var(--bg-page)]
-        text-[var(--text-primary)]
-        flex
-        flex-col
-        items-center
-        justify-center
-        px-4
-        antialiased
-      "
-    >
+    <>
       <SEO
         title="Page Not Found | Ayushman Chakraborty"
         description="The requested page could not be found on Ayushman Chakraborty's portfolio."
         noindex
       />
-      {/* 404 Content */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.5,
-          ease: "easeOut",
-        }}
-        className="
-          flex
-          flex-col
-          items-center
-          text-center
-          max-w-md
-        "
-      >
-        {/* Error Badge */}
-        <span
-          className="
-            jetbrains-mono
-            text-[10px]
-            sm:text-xs
-            px-2.5
-            py-1
-            rounded
-            border
-            border-[var(--border-color)]
-            bg-[var(--badge-subtle-bg)]
-            text-[var(--text-muted)]
-          "
+      <main id="main" className="page">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE }}
+          className="flex min-h-[calc(100svh-12rem)] flex-col items-center justify-center text-center"
         >
-          404 ERROR
-        </span>
+          <pre aria-hidden className="ascii-art text-[6.5px] leading-[1.15] sm:text-[9px]">
+            {ART_404}
+          </pre>
 
-        {/* Main Heading */}
-        <h1
-          className="
-            doto-font
-            text-4xl
-            sm:text-5xl
-            font-bold
-            tracking-tight
-            text-[var(--text-primary)]
-            mt-4
-          "
-        >
-          Page Not Found
-        </h1>
+          <h1 className="doto-font mt-6 text-[clamp(1.875rem,1.4rem+2vw,2.5rem)] leading-none font-bold tracking-[-0.02em] text-[var(--text-primary)]">
+            Page not found
+          </h1>
 
-        {/* Description */}
-        <p
-          className="
-            jetbrains-mono
-            text-[11px]
-            sm:text-xs
-            leading-relaxed
-            text-[var(--text-muted)]
-            mt-4
-            max-w-sm
-          "
-        >
-          The page you're looking for doesn't exist, may have moved, or is
-          temporarily unavailable.
-        </p>
+          <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-pretty text-[var(--text-muted)]">
+            The page you're looking for doesn't exist, may have moved, or is temporarily unavailable.
+          </p>
 
-        {/* Error Path */}
-        <div
-          className="
-            jetbrains-mono
-            text-[10px]
-            sm:text-xs
-            text-[var(--text-subtle)]
-            mt-5
-          "
-        >
-          {"// looks like you took a wrong turn"}
-        </div>
+          <p className="jetbrains-mono mt-4 max-w-full text-[11.5px] text-[var(--text-subtle)] [overflow-wrap:anywhere]">
+            zsh: no such file or directory: ~{shown}
+          </p>
 
-        {/* Return Home */}
-        <Link
-          to="/"
-          className="
-            mt-7
-            inline-flex
-            items-center
-            gap-2
-            px-4
-            py-2
-            rounded-lg
-            border
-            border-[var(--border-color)]
-            bg-[var(--badge-subtle-bg)]
-            text-xs
-            font-medium
-            text-[var(--text-primary)]
-            transition-all
-            duration-200
-            hover:-translate-y-[1px]
-            hover:border-[var(--text-subtle)]
-          "
-        >
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 18 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M15 9H3M3 9L7.5 4.5M3 9L7.5 13.5"
-              stroke="currentColor"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Link to="/" className="btn-pill-3d mt-6" data-variant="primary">
+            <svg aria-hidden width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M15 9H3M3 9L7.5 4.5M3 9L7.5 13.5"
+                stroke="currentColor"
+                strokeWidth="1.3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Return home
+          </Link>
 
-          Return Home
-        </Link>
-      </motion.div>
-
-      {/* Floating Bottom Navigation */}
-      <DockNavbar />
-
-      {/* Bottom Progressive Blur */}
-      <div className="bottom-progressive-blur" />
-    </div>
+          <nav aria-label="Suggested pages" className="mt-6 w-full max-w-[20rem]">
+            <ul className="flex flex-col">
+              {suggestions.map((s) => (
+                <li key={s.to}>
+                  <Link
+                    to={s.to}
+                    className="group jetbrains-mono flex min-h-11 items-center text-xs text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
+                  >
+                    <span>{s.label}</span>
+                    <span className="leader" aria-hidden />
+                    <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">
+                      →
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </motion.div>
+      </main>
+    </>
   );
 };
 

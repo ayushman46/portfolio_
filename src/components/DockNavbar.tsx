@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useTheme } from "../context/ThemeContext";
 import { FiSun, FiMoon } from "react-icons/fi";
 
@@ -9,6 +9,10 @@ interface NavItem {
   href: string;
   icon: (active: boolean) => React.ReactNode;
 }
+
+// Idle glyphs sit at .55 so they read on both themes; hover lifts them to full.
+const iconClass = (active: boolean) =>
+  `transition-opacity duration-200 ${active ? "opacity-100" : "opacity-[0.55] group-hover:opacity-100"}`;
 
 const navItems: NavItem[] = [
   {
@@ -20,9 +24,8 @@ const navItems: NavItem[] = [
         width="18px"
         viewBox="0 0 18 18"
         xmlns="http://www.w3.org/2000/svg"
-        className={`mb-0.5 transition-opacity duration-200 ${
-          active ? "opacity-100" : "opacity-40"
-        }`}
+        aria-hidden
+        className={iconClass(active)}
       >
         <g fill="currentColor">
           <path
@@ -53,6 +56,52 @@ const navItems: NavItem[] = [
   },
 
   {
+    name: "Work",
+    href: "/work",
+    icon: (active) => (
+      <svg
+        height="18px"
+        width="18px"
+        viewBox="0 0 18 18"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden
+        className={iconClass(active)}
+      >
+        <g fill="currentColor">
+          <rect
+            x="2.25"
+            y="5.25"
+            width="13.5"
+            height="9.5"
+            rx="2"
+            fillOpacity={active ? "0.35" : "0.2"}
+            stroke="none"
+          />
+          <rect
+            x="2.25"
+            y="5.25"
+            width="13.5"
+            height="9.5"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.2"
+          />
+          <path
+            d="M6.75 5.25V3.75C6.75 3.198 7.198 2.75 7.75 2.75H10.25C10.802 2.75 11.25 3.198 11.25 3.75V5.25"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.2"
+          />
+          <path d="M2.25 9.25H15.75" fill="none" stroke="currentColor" strokeWidth="1.2" />
+        </g>
+      </svg>
+    ),
+  },
+
+  {
     name: "Projects",
     href: "/projects",
     icon: (active) => (
@@ -61,9 +110,8 @@ const navItems: NavItem[] = [
         width="18px"
         viewBox="0 0 18 18"
         xmlns="http://www.w3.org/2000/svg"
-        className={`mb-0.5 transition-opacity duration-200 ${
-          active ? "opacity-100" : "opacity-40"
-        }`}
+        aria-hidden
+        className={iconClass(active)}
       >
         <g fill="currentColor">
           <path
@@ -99,9 +147,8 @@ const navItems: NavItem[] = [
         width="18px"
         viewBox="0 0 18 18"
         xmlns="http://www.w3.org/2000/svg"
-        className={`mb-0.5 transition-opacity duration-200 ${
-          active ? "opacity-100" : "opacity-40"
-        }`}
+        aria-hidden
+        className={iconClass(active)}
       >
         <g fill="currentColor">
           <path
@@ -132,7 +179,7 @@ const navItems: NavItem[] = [
   },
 
   {
-    name: "Blogs",
+    name: "Blog",
     href: "/blogs",
     icon: (active) => (
       <svg
@@ -140,9 +187,8 @@ const navItems: NavItem[] = [
         width="18px"
         viewBox="0 0 18 18"
         xmlns="http://www.w3.org/2000/svg"
-        className={`mb-0.5 transition-opacity duration-200 ${
-          active ? "opacity-100" : "opacity-40"
-        }`}
+        aria-hidden
+        className={iconClass(active)}
       >
         <g fill="currentColor">
           {/* Document background */}
@@ -152,7 +198,6 @@ const navItems: NavItem[] = [
             fillOpacity={active ? "0.35" : "0.2"}
             stroke="none"
           />
-
           {/* Document outline */}
           <path
             d="M4.75 2.25H11L14 5.25V14.25C14 15.216 13.216 16 12.25 16H4.75C3.784 16 3 15.216 3 14.25V4C3 3.034 3.784 2.25 4.75 2.25Z"
@@ -162,7 +207,6 @@ const navItems: NavItem[] = [
             strokeLinejoin="round"
             strokeWidth="1.2"
           />
-
           {/* Folded corner */}
           <path
             d="M11 2.5V5.25H13.75"
@@ -172,8 +216,7 @@ const navItems: NavItem[] = [
             strokeLinejoin="round"
             strokeWidth="1.2"
           />
-
-          {/* Blog text */}
+          {/* Text lines */}
           <path
             d="M6 8H11M6 10.5H11M6 13H9"
             fill="none"
@@ -187,115 +230,228 @@ const navItems: NavItem[] = [
   },
 ];
 
+// Auto-hide on phones only: hide while reading downwards, come back on any upward scroll.
+const PHONE_QUERY = "(max-width: 639px)";
+const HIDE_AFTER_Y = 160;
+const ALWAYS_SHOW_ABOVE_Y = 120;
+const SCROLL_DELTA = 6;
+const BOTTOM_ZONE = 160;
+
+// 44px tall hit area for every item (40px wide below 360px, 44px from there). pb-1 lifts the
+// glyph + label 2px so the active dot underneath clears descenders (the j in Projects, the g in Blog).
+const itemClass =
+  "relative group flex h-11 min-w-10 min-[360px]:min-w-11 flex-col items-center justify-center rounded-full px-1 pb-1 min-[360px]:px-1.5 sm:px-2.5";
+
+const labelClass = "mt-1 text-[10px] leading-none tracking-tight sm:text-[11px]";
+
+/** Only devices that really hover get the sliding pill, so a tap on a phone never leaves one stuck. */
+const canHover = () => window.matchMedia("(hover: hover)").matches;
+
+const isFocusVisible = (el: Element) => {
+  try {
+    return el.matches(":focus-visible");
+  } catch {
+    return false;
+  }
+};
+
 export const DockNavbar: React.FC = () => {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [hidden, setHidden] = useState(false);
+  const dockRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const phone = window.matchMedia(PHONE_QUERY);
+    let lastY = window.scrollY;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const nearBottom =
+        window.innerHeight + y >= document.documentElement.scrollHeight - BOTTOM_ZONE;
+      const focusInside = dockRef.current?.contains(document.activeElement) ?? false;
+
+      if (!phone.matches || y < ALWAYS_SHOW_ABOVE_Y || nearBottom || focusInside) {
+        lastY = y;
+        setHidden(false);
+        return;
+      }
+
+      // Small jitters accumulate until they cross the threshold.
+      const delta = y - lastY;
+      if (Math.abs(delta) <= SCROLL_DELTA) return;
+      lastY = y;
+      setHidden(delta > 0 && y > HIDE_AFTER_Y);
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    phone.addEventListener("change", update);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      phone.removeEventListener("change", update);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  // Always come back on navigation (e.g. one project page to the next).
+  useEffect(() => {
+    setHidden(false);
+  }, [location.pathname]);
+
+  // Mirrored on <html> so the bottom blur can fade out with the dock.
+  useEffect(() => {
+    document.documentElement.dataset.dock = hidden ? "hidden" : "shown";
+  }, [hidden]);
+
+  useEffect(
+    () => () => {
+      document.documentElement.dataset.dock = "shown";
+    },
+    [],
+  );
+
+  const hoverProps = (key: string) => ({
+    onMouseEnter: () => {
+      if (canHover()) setHovered(key);
+    },
+    onFocus: (e: React.FocusEvent<HTMLElement>) => {
+      if (canHover() || isFocusVisible(e.currentTarget)) setHovered(key);
+    },
+  });
+
+  // Soft pill that slides between dock items as the cursor moves.
+  const hoverPill = (key: string) =>
+    hovered === key && (
+      <motion.span
+        layoutId="dock-hover"
+        aria-hidden
+        className="absolute inset-0 rounded-full bg-[var(--text-primary)]/[0.08] ring-1 ring-[var(--text-primary)]/[0.06]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ type: "spring", stiffness: 500, damping: 38 }}
+      />
+    );
+
+  const nextTheme = theme === "dark" ? "light" : "dark";
 
   return (
     <div
+      ref={dockRef}
       id="navigation-menu"
-      className="
+      onFocusCapture={() => setHidden(false)}
+      className={`
+        dock-shell
         fixed
-        bottom-4
         left-1/2
         -translate-x-1/2
+        bottom-[calc(0.75rem+env(safe-area-inset-bottom))]
+        sm:bottom-6
+        z-[999]
         rounded-full
-        px-5
-        sm:px-6
-        py-2
-        sm:py-2.5
-        sm:bottom-8
         border
         border-[var(--dock-border)]
         bg-[var(--dock-bg)]
-        shadow-[0_8px_32px_rgba(0,0,0,0.2)]
-        backdrop-blur-md
-        z-[999]
-        transition-all
+        backdrop-blur-[12px]
+        backdrop-saturate-150
+        px-1.5
+        py-1
+        min-[360px]:px-2
+        sm:px-3
+        sm:py-1.5
+        transition-transform
         duration-300
-      "
+        ease-[cubic-bezier(0.16,1,0.3,1)]
+        ${hidden ? "translate-y-[calc(100%+2rem+env(safe-area-inset-bottom))]" : "translate-y-0"}
+      `}
     >
-      <nav className="flex flex-row items-center gap-5 sm:gap-7">
+      <nav
+        aria-label="Primary"
+        className="flex items-center gap-0 min-[360px]:gap-0.5 sm:gap-3"
+        onMouseLeave={() => setHovered(null)}
+        onBlur={() => setHovered(null)}
+      >
         {navItems.map((item) => {
           const isActive =
             item.href === "/"
               ? location.pathname === "/"
-              : location.pathname.startsWith(item.href);
+              : location.pathname === item.href || location.pathname.startsWith(`${item.href}/`);
 
           return (
             <Link
               key={item.name}
               to={item.href}
-              className="relative group"
+              aria-current={isActive ? "page" : undefined}
+              {...hoverProps(item.name)}
+              className={itemClass}
             >
-              <div
-                className={`flex flex-col items-center justify-center transition-all duration-200 ${
+              <AnimatePresence>{hoverPill(item.name)}</AnimatePresence>
+              <span
+                className={`relative z-10 flex flex-col items-center transition-colors duration-200 ${
                   isActive
-                    ? "scale-105 text-[var(--text-primary)] font-semibold"
-                    : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:scale-105"
+                    ? "text-[var(--text-primary)]"
+                    : "text-[var(--text-muted)] group-hover:text-[var(--text-primary)]"
                 }`}
               >
                 {item.icon(isActive)}
-
-                <span className="text-[10px] sm:text-[11px] font-medium tracking-tight">
+                <span className={`${labelClass} ${isActive ? "font-semibold" : "font-medium"}`}>
                   {item.name}
                 </span>
-              </div>
+              </span>
 
               {isActive && (
-                <motion.div
-                  layoutId="dock-indicator"
-                  className="
-                    absolute
-                    -bottom-1
-                    left-1/2
-                    -translate-x-1/2
-                    w-1
-                    h-1
-                    rounded-full
-                    bg-[var(--text-primary)]
-                  "
-                  transition={{
-                    type: "spring",
-                    stiffness: 400,
-                    damping: 30,
-                  }}
+                <motion.span
+                  layoutId="dock-active"
+                  aria-hidden
+                  className="absolute bottom-[2px] left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[var(--accent-strong)]"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
             </Link>
           );
         })}
 
-        {/* Vertical Divider */}
-        <div className="h-5 w-[1px] bg-[var(--border-color)]" />
+        <div
+          aria-hidden
+          className="mx-0.5 h-6 w-px shrink-0 bg-[var(--border-color)] min-[360px]:mx-1"
+        />
 
-        {/* Light / Dark Theme Toggle */}
+        {/* Light / Dark theme toggle */}
         <button
+          type="button"
           onClick={toggleTheme}
-          aria-label="Toggle Light/Dark Theme"
-          className="
-            flex
-            flex-col
-            items-center
-            justify-center
-            text-[var(--text-muted)]
-            hover:text-[var(--text-primary)]
-            transition-all
-            duration-200
-            hover:scale-105
-            cursor-pointer
-          "
+          {...hoverProps("theme")}
+          aria-label={`Switch to ${nextTheme} theme`}
+          className={`${itemClass} cursor-pointer`}
         >
-          <div className="h-[18px] w-[18px] flex items-center justify-center mb-0.5 text-[var(--text-primary)]">
-            {theme === "dark" ? (
-              <FiSun className="text-[15px] opacity-90 hover:opacity-100" />
-            ) : (
-              <FiMoon className="text-[15px] opacity-90 hover:opacity-100" />
-            )}
-          </div>
+          <AnimatePresence>{hoverPill("theme")}</AnimatePresence>
+          <span className="relative z-10 flex flex-col items-center text-[var(--text-muted)] transition-colors duration-200 group-hover:text-[var(--text-primary)]">
+            {/* initial={false}: the icon is there the moment the dock mounts */}
+            <AnimatePresence initial={false} mode="wait">
+              <motion.span
+                key={theme}
+                initial={{ rotate: -90, scale: 0.6, opacity: 0 }}
+                animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                exit={{ rotate: 90, scale: 0.6, opacity: 0, transition: { duration: 0.12 } }}
+                transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                className="flex h-[18px] w-[18px] items-center justify-center"
+              >
+                {theme === "dark" ? (
+                  <FiSun aria-hidden className={`text-[15px] ${iconClass(false)}`} />
+                ) : (
+                  <FiMoon aria-hidden className={`text-[15px] ${iconClass(false)}`} />
+                )}
+              </motion.span>
+            </AnimatePresence>
 
-          <span className="text-[10px] sm:text-[11px] font-medium tracking-tight">
-            {theme === "dark" ? "Light" : "Dark"}
+            <span className={`${labelClass} font-medium`}>Theme</span>
           </span>
         </button>
       </nav>

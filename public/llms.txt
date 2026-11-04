@@ -1,6 +1,6 @@
 # Ayushman Chakraborty
 
-> AI, backend and data engineer based in Bengaluru, India.
+> AI & backend engineer in Bengaluru (IST) shipping LLM applications, RAG systems, agentic AI and data pipelines. Final-year B.Tech CSE (Data Science) at Manipal Institute of Technology, graduating May 2027. Two live AI products with 130+ combined users; merged fixes in Better Auth (29k+ GitHub stars) and Corsair (YC W25). Professional cricketer alongside the degree.
 
 ## Portfolio
 
@@ -8,23 +8,58 @@ https://ayushmanchakraborty.vercel.app/
 
 This is the personal portfolio of Ayushman Chakraborty. It covers AI engineering, backend development, data engineering, machine learning, full-stack products, computer vision and open source software.
 
+## Contact
+
+- Email: ayushman.mitblr@gmail.com
+- Resume (PDF): https://ayushmanchakraborty.vercel.app/Ayushman-Chakraborty-Resume.pdf
+- X: https://x.com/Im_ayushman46
+
 ## Profiles
 
 - GitHub: https://github.com/ayushman46
 - LinkedIn: https://www.linkedin.com/in/ayushmanchakraborty
+- LeetCode: https://leetcode.com/u/ayush46/
 
 ## Projects
 
-- ReleaseLens: https://ayushmanchakraborty.vercel.app/projects/releaselens
-- CodeGlyph: https://ayushmanchakraborty.vercel.app/projects/codeglyph
-- Prepvia: https://ayushmanchakraborty.vercel.app/projects/prepvia
+- CodeGlyph (production RAG + agentic code-intelligence SaaS, 30+ users, 5,000-file repos, agent opens multi-file PRs): https://ayushmanchakraborty.vercel.app/projects/codeglyph
+- Prepvia (real-time AI interview platform, 100+ users, 50+ completed interviews): https://ayushmanchakraborty.vercel.app/projects/prepvia
+- ReleaseLens (AIOps release intelligence on 519K+ CI builds; in progress): https://ayushmanchakraborty.vercel.app/projects/releaselens
+- MandateGraph (authorization and security harness for AI agents; in progress, repo not public yet): https://ayushmanchakraborty.vercel.app/projects/mandategraph
+- twtdash: https://ayushmanchakraborty.vercel.app/projects/twtdash
 - Seamly: https://ayushmanchakraborty.vercel.app/projects/seamly
+- Settle: https://ayushmanchakraborty.vercel.app/projects/settle
 - StrideCircle: https://ayushmanchakraborty.vercel.app/projects/stridecircle
+- TraininGenie: https://ayushmanchakraborty.vercel.app/projects/trainingenie
+- ChaosAI: https://ayushmanchakraborty.vercel.app/projects/chaosai
+- Document QA: https://ayushmanchakraborty.vercel.app/projects/rag-document-qa
+- IPL Match Predictor: https://ayushmanchakraborty.vercel.app/projects/ipl-match-predictor
+
+## Open source
+
+- Better Auth — merged PR #10388: https://github.com/better-auth/better-auth/pull/10388
+- Corsair — merged PR #491: https://github.com/corsairdev/corsair/pull/491
+- PyTorch — open PR #200308: https://github.com/pytorch/pytorch/pull/200308
+- Onyx — open PR #14626: https://github.com/onyx-dot-app/onyx/pull/14626
+- Better Auth — open PR #10461: https://github.com/better-auth/better-auth/pull/10461
 
 ## Experience and education
 
-- Software Engineering and Generative AI Intern at Wipro Limited.
-- Software Development Intern at TraininGenie.
-- B.Tech Computer Science and Engineering (Data Science) at Manipal Institute of Technology, Bengaluru.
+- Software Development Intern (Full Stack) at TraininGenie, May 2026 – Jul 2026: sole developer of the company's production website (Next.js, Supabase); led technical SEO and GEO.
+- Software Engineering and Generative AI Intern at Wipro Limited, Jun 2025 – Jul 2025: architected AutoBlog, a multimodal GenAI pipeline turning technical videos from 30+ internal sources into documentation (Whisper + computer vision, Azure OpenAI GPT-4o); frame deduplication cut frames sent to the model by 75% and sped up processing by about 40%; shipped via Streamlit and Docker.
+- B.Tech Computer Science and Engineering (Data Science) at Manipal Institute of Technology, Bengaluru, Jul 2023 – May 2027. Professional cricketer and athlete alongside the degree.
 
 See the work page for the complete experience timeline: https://ayushmanchakraborty.vercel.app/work
+
+## Awards
+
+- Top 5 teams, Bosch (BGSW) Hackathon on Governing AI Agents
+- Top 5 of 50 teams, Hackverse Hackathon (IBM and AWS)
+
+## Certifications
+
+- MLOps, Deployment and Model Life Cycling (DataCamp)
+- Model Context Protocol (Anthropic)
+- Make Agentic AI Work for You (IBM SkillsBuild, Oct 2026): https://www.credly.com/go/WPcLDSmS
+- Computer Vision (Kaggle Learn, Nov 2026)
+- Intro to Deep Learning (Kaggle Learn, Nov 2026)

@@ -1,0 +1,37 @@
+/* =========================================================
+   HOME — §01 GitHub Activity (owned by the home-a builder)
+   The library sets inline styles on its scroller, footer and
+   cells, so the few overrides below need !important.
+   ========================================================= */
+
+/* sized to the card in JS: nothing ever scrolls sideways */
+.react-activity-calendar__scroll-container {
+  overflow: hidden !important;
+}
+
+.react-activity-calendar__footer {
+  font-family: var(--font-jetbrains-mono);
+  font-size: 11px;
+  /* pinned so the skeleton can reserve the exact height */
+  line-height: 18px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* a long count wraps rather than widening the graph on a 320px phone */
+.react-activity-calendar__count {
+  white-space: normal;
+}
+
+/* the only colour on the graph: today's cell, ringed in the accent */
+.react-activity-calendar rect[data-today] {
+  stroke: var(--accent-strong) !important;
+  stroke-width: 1.5px;
+}
+
+/* error / timeout copy, centred in the reserved space */
+.activity-graph {
+  font-family: var(--font-jetbrains-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}

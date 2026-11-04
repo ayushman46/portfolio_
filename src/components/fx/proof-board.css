@@ -1,0 +1,265 @@
+/* ProofBoard: split-flap departures board of shipped / merged work */
+
+.pb-caption {
+  margin: -0.5rem 0 0.875rem;
+}
+
+.pb-board {
+  padding: 0.75rem 1rem 0.5rem;
+  overflow: hidden;
+}
+
+.pb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(11px, 3.1vw, 14px);
+}
+
+.pb-table thead th {
+  padding: 0 0 0.625rem;
+  text-align: left;
+  font-weight: 400;
+  border-bottom: 1px dashed var(--border-dashed);
+}
+
+.pb-table thead th + th,
+.pb-table tbody td + td {
+  padding-left: 1.25rem;
+}
+
+.pb-table .pb-col-status {
+  text-align: right;
+}
+
+.pb-table tbody td {
+  padding: 0.5rem 0;
+  vertical-align: middle;
+}
+
+.pb-table tbody tr + tr td {
+  border-top: 1px dashed var(--border-color);
+}
+
+.pb-table tbody tr:first-child td {
+  padding-top: 0.75rem;
+}
+
+/* ---------- flaps ---------- */
+
+.pb-flaps {
+  display: inline-flex;
+  flex-wrap: wrap;
+  row-gap: 2px;
+  overflow-wrap: anywhere;
+  vertical-align: middle;
+}
+
+.pb-flap {
+  display: inline-grid;
+  place-items: center;
+  width: 1ch;
+  min-width: 1ch;
+  height: 1.45em;
+  margin-right: 1px;
+  font-family: var(--font-doto);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-primary);
+  background-color: var(--pill-bg);
+  background-image: linear-gradient(var(--border-color), var(--border-color));
+  background-size: 100% 1px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 2px;
+  transform-origin: 50% 50%;
+}
+
+.pb-flap[data-f] {
+  animation: pb-flip 70ms steps(2);
+}
+
+@keyframes pb-flip {
+  50% {
+    transform: scaleY(0.08);
+  }
+}
+
+.pb-col-code .pb-flap {
+  color: var(--text-subtle);
+}
+
+.pb-col-detail .pb-flap {
+  color: var(--text-muted);
+}
+
+/* ---------- status ---------- */
+
+.pb-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.pb-status--live .pb-col-status .pb-flap,
+.pb-status--merged .pb-col-status .pb-flap {
+  color: var(--accent);
+}
+
+.pb-status--shipped .pb-col-status .pb-flap {
+  color: var(--text-muted);
+}
+
+.pb-status--prog .pb-col-status .pb-flap {
+  color: var(--text-subtle);
+}
+
+.pb-breathe {
+  display: inline-block;
+  color: var(--text-subtle);
+  font-family: var(--font-ibm-plex-mono, monospace);
+  line-height: 1;
+  animation: pb-breathe 2.4s ease-in-out infinite alternate;
+}
+
+.pb-breathe--still {
+  animation: none;
+}
+
+@keyframes pb-breathe {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- links + rows ---------- */
+
+.pb-link {
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.pb-link:focus-visible {
+  outline: 1px dashed var(--accent);
+  outline-offset: 2px;
+}
+
+.pb-table tbody tr {
+  transition: transform 160ms var(--ease-out, ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pb-table tbody tr:hover {
+    transform: translateY(-1px);
+  }
+
+  .pb-table tbody tr:hover .pb-col-item .pb-flap {
+    background-color: var(--card-bg);
+  }
+}
+
+/* ---------- phone ---------- */
+
+@media (max-width: 639.98px) {
+  .pb-board {
+    padding: 0.5rem 0.75rem 0.25rem;
+  }
+
+  .pb-table,
+  .pb-table thead,
+  .pb-table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .pb-table .pb-col-code {
+    display: none;
+  }
+
+  .pb-table tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 0.75rem;
+    align-items: center;
+  }
+
+  .pb-table thead tr {
+    padding-bottom: 0.625rem;
+    border-bottom: 1px dashed var(--border-dashed);
+  }
+
+  .pb-table thead th {
+    padding: 0;
+    border: 0;
+  }
+
+  /* the detail header has no column of its own on phones */
+  .pb-table thead .pb-col-detail {
+    display: none;
+  }
+
+  .pb-table tbody tr {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-dashed);
+  }
+
+  .pb-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .pb-table thead th + th,
+  .pb-table tbody td + td {
+    padding-left: 0;
+  }
+
+  .pb-table tbody td,
+  .pb-table tbody tr:first-child td,
+  .pb-table tbody tr + tr td {
+    display: block;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  .pb-table .pb-col-item {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .pb-table .pb-col-status {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .pb-table tbody .pb-col-detail {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 6px;
+    font-size: 11px;
+  }
+
+  .pb-table tbody .pb-col-detail .pb-flap {
+    color: var(--text-muted);
+  }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-flap,
+  .pb-flap[data-f],
+  .pb-breathe {
+    animation: none;
+  }
+
+  .pb-table tbody tr,
+  .pb-table tbody tr:hover {
+    transition: none;
+    transform: none;
+  }
+}

@@ -1,313 +1,150 @@
 import React from "react";
-import DockNavbar from "../components/DockNavbar";
+import { motion, type Variants } from "motion/react";
 import Footer from "../components/Footer";
+import VerifyLog from "../components/fx/VerifyLog";
 import SEO from "../components/SEO";
 
-import {
-  FaReact,
-  FaPython,
-  FaGitAlt,
-  FaGithub,
-} from "react-icons/fa";
+import { FaReact, FaPython } from "react-icons/fa";
+import { SiTypescript, SiPostgresql, SiSupabase, SiFastapi } from "react-icons/si";
+import { TbDatabaseSearch } from "react-icons/tb";
+import { allSkills, skillCategories } from "../data/skills";
+import "../styles/inner.css";
 
-import {
-  SiMongodb,
-  SiTypescript,
-  SiPostgresql,
-  SiSupabase,
-  SiNextdotjs,
-  SiDocker,
-  SiFastapi,
-} from "react-icons/si";
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-import {
-  TbFileTypeSql,
-  TbBrain,
-  TbDatabaseSearch,
-  TbApi,
-} from "react-icons/tb";
+const rowVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: EASE, delay: Math.min(i, 8) * 0.06 },
+  }),
+};
 
-import { IoLogoJavascript } from "react-icons/io5";
+const pad = (n: number) => String(n).padStart(2, "0");
 
-interface SkillItem {
-  name: string;
-  icon: React.ReactNode;
-}
-
-interface SkillCategory {
-  tag: string;
-  skills: SkillItem[];
-}
-
-const skillCategories: SkillCategory[] = [
-  {
-    tag: "<languages/>",
-    skills: [
-      {
-        name: "Python",
-        icon: <FaPython className="text-yellow-300" />,
-      },
-      {
-        name: "TypeScript",
-        icon: <SiTypescript className="text-blue-400" />,
-      },
-      {
-        name: "JavaScript",
-        icon: <IoLogoJavascript className="text-yellow-400" />,
-      },
-      {
-        name: "SQL",
-        icon: <TbFileTypeSql className="text-emerald-400" />,
-      },
-    ],
-  },
-
-  {
-    tag: "<ai & ml/>",
-    skills: [
-      {
-        name: "RAG",
-        icon: <TbDatabaseSearch className="text-purple-400" />,
-      },
-      {
-        name: "LLMs",
-        icon: <TbBrain className="text-violet-400" />,
-      },
-      {
-        name: "AI Agents",
-        icon: <TbBrain className="text-fuchsia-400" />,
-      },
-      {
-        name: "Vector Search",
-        icon: <TbDatabaseSearch className="text-cyan-400" />,
-      },
-      {
-        name: "Embeddings",
-        icon: <TbBrain className="text-indigo-400" />,
-      },
-      { name: "XGBoost", icon: <TbBrain className="text-orange-400" /> },
-      { name: "MLflow", icon: <TbBrain className="text-cyan-400" /> },
-    ],
-  },
-
-  {
-    tag: "<backend & web/>",
-    skills: [
-      {
-        name: "FastAPI",
-        icon: <SiFastapi className="text-emerald-400" />,
-      },
-      {
-        name: "React",
-        icon: <FaReact className="text-cyan-400" />,
-      },
-      {
-        name: "Next.js",
-        icon: (
-          <SiNextdotjs className="text-[var(--text-primary)]" />
-        ),
-      },
-      {
-        name: "REST APIs",
-        icon: <TbApi className="text-blue-400" />,
-      },
-      { name: "GraphQL", icon: <TbApi className="text-pink-400" /> },
-      { name: "WebSockets", icon: <TbApi className="text-cyan-400" /> },
-      { name: "shadcn/ui", icon: <FaReact className="text-cyan-400" /> },
-    ],
-  },
-
-  {
-    tag: "<databases/>",
-    skills: [
-      {
-        name: "PostgreSQL",
-        icon: <SiPostgresql className="text-blue-400" />,
-      },
-      {
-        name: "MongoDB",
-        icon: <SiMongodb className="text-emerald-500" />,
-      },
-      {
-        name: "Supabase",
-        icon: <SiSupabase className="text-emerald-400" />,
-      },
-      { name: "Turso", icon: <SiPostgresql className="text-orange-400" /> },
-    ],
-  },
-
-  {
-    tag: "<tools & devops/>",
-    skills: [
-      {
-        name: "Git",
-        icon: <FaGitAlt className="text-orange-500" />,
-      },
-      {
-        name: "GitHub",
-        icon: (
-          <FaGithub className="text-[var(--text-primary)]" />
-        ),
-      },
-      {
-        name: "Docker",
-        icon: <SiDocker className="text-blue-400" />,
-      },
-      { name: "Apache Airflow", icon: <TbBrain className="text-red-400" /> },
-      { name: "dbt", icon: <TbDatabaseSearch className="text-orange-400" /> },
-      { name: "AWS S3", icon: <TbDatabaseSearch className="text-yellow-400" /> },
-      { name: "OpenTelemetry", icon: <TbApi className="text-purple-400" /> },
-      { name: "CI/CD", icon: <FaGithub className="text-[var(--text-primary)]" /> },
-      { name: "pytest", icon: <FaPython className="text-yellow-300" /> },
-      { name: "Jest", icon: <SiTypescript className="text-red-400" /> },
-    ],
-  },
-];
+/**
+ * Tech chip set inline with prose. Any punctuation that follows the chip is
+ * rendered inside the same no-wrap span so it can never orphan onto the next line.
+ */
+const InlineChip: React.FC<{ icon: React.ReactNode; after?: string; children: React.ReactNode }> = ({
+  icon,
+  after,
+  children,
+}) => (
+  <span className="whitespace-nowrap">
+    <span className="inline-flex items-center gap-1 rounded-[3px] border border-[var(--border-color)] bg-[var(--pill-bg)] px-1.5 py-1 align-middle text-xs leading-none font-medium text-[var(--text-primary)]">
+      <span aria-hidden className="text-xs">
+        {icon}
+      </span>
+      {children}
+    </span>
+    {after}
+  </span>
+);
 
 export const SkillsPage: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] antialiased">
+    <>
       <SEO
         title="Skills | Ayushman Chakraborty"
-        description="Ayushman Chakraborty's technical skills across Python, TypeScript, FastAPI, React, Next.js, RAG, AI agents, data engineering, databases and DevOps."
+        description="Ayushman Chakraborty's skills: LLMs, RAG, AI agents and MCP; Python, SQL, Airflow, dbt and MLflow data pipelines; FastAPI, Next.js and TypeScript; AWS, Azure, Docker and OpenTelemetry."
         path="/skills"
       />
-      <main className="page">
-
-        {/* Page Header */}
-        <div className="page-col mb-5">
-          <div>
-            <h1 className="doto-font text-3xl font-bold tracking-tight text-[var(--text-primary)]">
-              Skills
-            </h1>
-          </div>
-        </div>
-
-        {/* Narrative */}
-        <div className="rounded-lg p-3 sm:p-4 mb-5 text-sm text-[var(--text-muted)] leading-relaxed">
-          <p className="flex flex-wrap items-center gap-x-1 gap-y-1.5">
-
-            <span>I build production</span>
-
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-[var(--border-color)] bg-[var(--pill-bg)] text-[11px] text-[var(--text-primary)] font-medium">
-              <TbBrain className="text-violet-400 text-xs" />
-              AI and Data Systems
-            </span>
-
-            <span>with</span>
-
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-[var(--border-color)] bg-[var(--pill-bg)] text-[11px] text-[var(--text-primary)] font-medium">
-              <FaPython className="text-yellow-300 text-xs" />
-              Python
-            </span>
-
-            <span>,</span>
-
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-[var(--border-color)] bg-[var(--pill-bg)] text-[11px] text-[var(--text-primary)] font-medium">
-              <SiFastapi className="text-emerald-400 text-xs" />
-              FastAPI
-            </span>
-
-            <span>and</span>
-
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-[var(--border-color)] bg-[var(--pill-bg)] text-[11px] text-[var(--text-primary)] font-medium">
-              <TbDatabaseSearch className="text-purple-400 text-xs" />
-              RAG
-            </span>
-
-            <span>. I build interfaces with</span>
-
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-[var(--border-color)] bg-[var(--pill-bg)] text-[11px] text-[var(--text-primary)] font-medium">
-              <FaReact className="text-cyan-400 text-xs" />
-              React
-            </span>
-
-            <span>+</span>
-
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-[var(--border-color)] bg-[var(--pill-bg)] text-[11px] text-[var(--text-primary)] font-medium">
-              <SiTypescript className="text-blue-400 text-xs" />
-              TypeScript
-            </span>
-
-            <span>, backed by</span>
-
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-[var(--border-color)] bg-[var(--pill-bg)] text-[11px] text-[var(--text-primary)] font-medium">
-              <SiPostgresql className="text-blue-400 text-xs" />
-              PostgreSQL
-            </span>
-
-            <span>and</span>
-
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-[var(--border-color)] bg-[var(--pill-bg)] text-[11px] text-[var(--text-primary)] font-medium">
-              <SiSupabase className="text-emerald-400 text-xs" />
-              Supabase
-            </span>
-
-            <span>.</span>
+      <main id="main" className="page">
+        <motion.header
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE }}
+        >
+          <p className="rail inner-eyebrow">
+            <span className="text-[var(--accent)]">[03]</span>
+            <span>/ 04</span>
+            <span>· {allSkills.length} skills</span>
+            <span>· {skillCategories.length} groups</span>
           </p>
-        </div>
+          <h1 className="inner-title">Skills</h1>
+          <div className="tick-rule mt-8" aria-hidden />
+        </motion.header>
 
-        {/* Categorized Skills */}
-        <div className="flex flex-col gap-4 sm:gap-5">
+        {/* Narrative — each chip is glued to the punctuation after it, so no line can start with "," or "." */}
+        <motion.p
+          className="mt-8 max-w-[44rem] text-base leading-[2.1] text-pretty text-[var(--text-muted)]"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: EASE, delay: 0.06 }}
+        >
+          I ship LLM, RAG and agentic systems with{" "}
+          <InlineChip icon={<FaPython />} after=",">
+            Python
+          </InlineChip>{" "}
+          <InlineChip icon={<SiFastapi />}>FastAPI</InlineChip> and{" "}
+          <InlineChip icon={<TbDatabaseSearch />} after=".">
+            RAG
+          </InlineChip>{" "}
+          I build interfaces with{" "}
+          <InlineChip icon={<FaReact />} after=" +">
+            React
+          </InlineChip>{" "}
+          <InlineChip icon={<SiTypescript />} after=",">
+            TypeScript
+          </InlineChip>{" "}
+          backed by <InlineChip icon={<SiPostgresql />}>PostgreSQL</InlineChip> and{" "}
+          <InlineChip icon={<SiSupabase />} after=".">
+            Supabase
+          </InlineChip>
+        </motion.p>
+
+        {/* Index: group label left, chips right from 768px */}
+        <motion.div
+          className="mt-10 flex flex-col border-t border-dashed border-[var(--border-color)]"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+        >
           {skillCategories.map((category, index) => (
-            <div
-              key={index}
-              className="flex flex-col gap-1.5"
+            <motion.section
+              key={category.tag}
+              custom={index}
+              variants={rowVariants}
+              aria-labelledby={`skills-${index}`}
+              className="grid gap-3 border-b border-dashed border-[var(--border-color)] py-5 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-8"
             >
-              <div className="jetbrains-mono text-xs font-semibold text-[var(--text-muted)] tracking-wider">
-                {category.tag}
-              </div>
+              <h2 id={`skills-${index}`} className="jetbrains-mono flex items-baseline gap-2 text-xs md:pt-2">
+                <span aria-hidden className="text-[var(--text-subtle)] tabular-nums">
+                  {pad(index + 1)}
+                </span>
+                <span className="font-medium text-[var(--text-primary)]">{category.tag}</span>
+                <span className="text-[var(--text-subtle)] tabular-nums">· {category.skills.length}</span>
+              </h2>
 
-              <div className="flex flex-wrap gap-1.5">
-                {category.skills.map((skill, skillIndex) => (
-                  <div
-                    key={skillIndex}
-                    className="
-                      inline-flex
-                      items-center
-                      justify-center
-                      whitespace-nowrap
-                      rounded-md
-                      font-medium
-                      border
-                      border-[var(--border-color)]
-                      h-[28px]
-                      cursor-default
-                      gap-1.5
-                      bg-[var(--card-bg)]
-                      px-2.5
-                      text-xs
-                      text-[var(--text-primary)]
-                      hover:border-[var(--text-muted)]
-                      hover:bg-[var(--card-hover)]
-                      transition-all
-                      duration-200
-                      shadow-xs
-                    "
+              <ul className="flex flex-wrap gap-1.5">
+                {category.skills.map((skill) => (
+                  <li
+                    key={skill.name}
+                    className="inline-flex h-8 items-center gap-1.5 rounded-md border border-[var(--border-color)] bg-[var(--card-bg)] px-2.5 text-[0.8125rem] font-medium whitespace-nowrap text-[var(--text-primary)]"
                   >
-                    <span className="text-sm">
+                    <span
+                      aria-hidden
+                      className="text-[12px] leading-none"
+                    >
                       {skill.icon}
                     </span>
-
-                    <span className="font-medium text-xs text-[var(--text-primary)]">
-                      {skill.name}
-                    </span>
-                  </div>
+                    {skill.name}
+                  </li>
                 ))}
-              </div>
-            </div>
+              </ul>
+            </motion.section>
           ))}
+        </motion.div>
+
+        <div className="mt-14">
+          <VerifyLog />
         </div>
 
         <Footer />
       </main>
-
-      {/* Floating Bottom Dock */}
-      <DockNavbar />
-
-      {/* Bottom Blur */}
-      <div className="bottom-progressive-blur" />
-    </div>
+    </>
   );
 };
 

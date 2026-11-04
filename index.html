@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" class="dark" style="color-scheme: dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/android-chrome-192x192.jpg" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Ayushman Chakraborty | AI Engineer &amp; Software Developer</title>
-    <meta name="description" content="Ayushman Chakraborty is an AI engineer and software developer in Bengaluru building production AI systems, data pipelines, APIs and open source projects." />
-    <meta name="keywords" content="Ayushman Chakraborty, AI engineer, software developer, backend developer, data engineering, machine learning, Bengaluru, Manipal Institute of Technology, Wipro, TraininGenie" />
+    <meta name="description" content="Ayushman Chakraborty is an AI and backend engineer in Bengaluru shipping LLM apps, RAG, agentic AI and data pipelines: GenAI at Wipro, two live AI products with 130+ users, and merged fixes in Better Auth and Corsair (YC W25)." />
+    <meta name="keywords" content="Ayushman Chakraborty, AI engineer, backend engineer, LLM applications, RAG, agentic AI, MCP, data engineering, MLOps, machine learning, Bengaluru, Manipal Institute of Technology, Wipro, TraininGenie, CodeGlyph, Prepvia" />
     <meta name="author" content="Ayushman Chakraborty" />
     <meta name="creator" content="Ayushman Chakraborty" />
     <meta name="publisher" content="Ayushman Chakraborty" />
@@ -22,14 +22,14 @@
     <meta property="og:type" content="profile" />
     <meta property="og:site_name" content="Ayushman Chakraborty" />
     <meta property="og:title" content="Ayushman Chakraborty | AI Engineer &amp; Software Developer" />
-    <meta property="og:description" content="AI engineer and software developer in Bengaluru building production AI systems, data pipelines, APIs and open source projects." />
+    <meta property="og:description" content="AI and backend engineer in Bengaluru shipping LLM apps, RAG, agentic AI and data pipelines: GenAI at Wipro, two live AI products with 130+ users, merged fixes in Better Auth and Corsair (YC W25)." />
     <meta property="og:url" content="https://ayushmanchakraborty.vercel.app/" />
     <meta property="og:image" content="https://ayushmanchakraborty.vercel.app/og-image.svg" />
     <meta property="og:image:alt" content="Ayushman Chakraborty - AI Engineer and Software Developer" />
     <meta property="og:locale" content="en_IN" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Ayushman Chakraborty | AI Engineer &amp; Software Developer" />
-    <meta name="twitter:description" content="AI engineer and software developer in Bengaluru building production AI systems, data pipelines, APIs and open source projects." />
+    <meta name="twitter:description" content="AI and backend engineer in Bengaluru shipping LLM apps, RAG, agentic AI and data pipelines: GenAI at Wipro, two live AI products with 130+ users, merged fixes in Better Auth and Corsair (YC W25)." />
     <meta name="twitter:image" content="https://ayushmanchakraborty.vercel.app/og-image.svg" />
     <meta name="twitter:image:alt" content="Ayushman Chakraborty - AI Engineer and Software Developer" />
     <script type="application/ld+json">
@@ -42,8 +42,8 @@
             "name": "Ayushman Chakraborty",
             "url": "https://ayushmanchakraborty.vercel.app/",
             "image": "https://ayushmanchakraborty.vercel.app/ayushman-profile.jpeg",
-            "jobTitle": "AI, Backend & Data Engineer",
-            "description": "AI, backend and data engineer building production large language model applications, data pipelines and APIs.",
+            "jobTitle": "AI & Backend Engineer",
+            "description": "AI and backend engineer shipping LLM applications, RAG systems, agentic AI and data pipelines; GenAI intern at Wipro, two live AI products with 130+ combined users; final-year B.Tech CSE (Data Science) at Manipal Institute of Technology, Bengaluru, graduating May 2027.",
             "sameAs": [
               "https://github.com/ayushman46",
               "https://www.linkedin.com/in/ayushmanchakraborty"
@@ -56,12 +56,24 @@
               "@type": "CollegeOrUniversity",
               "name": "Manipal Institute of Technology"
             },
+            "award": [
+              "Top 5 teams, Bosch (BGSW) Hackathon on Governing AI Agents",
+              "Top 5 of 50 teams, Hackverse Hackathon (IBM and AWS)"
+            ],
+            "hasCredential": [
+              { "@type": "EducationalOccupationalCredential", "name": "MLOps, Deployment and Model Life Cycling", "recognizedBy": { "@type": "Organization", "name": "DataCamp" } },
+              { "@type": "EducationalOccupationalCredential", "name": "Model Context Protocol", "recognizedBy": { "@type": "Organization", "name": "Anthropic" } },
+              { "@type": "EducationalOccupationalCredential", "name": "Make Agentic AI Work for You", "recognizedBy": { "@type": "Organization", "name": "IBM SkillsBuild" }, "url": "https://www.credly.com/go/WPcLDSmS" },
+              { "@type": "EducationalOccupationalCredential", "name": "Computer Vision", "recognizedBy": { "@type": "Organization", "name": "Kaggle" } },
+              { "@type": "EducationalOccupationalCredential", "name": "Intro to Deep Learning", "recognizedBy": { "@type": "Organization", "name": "Kaggle" } }
+            ],
             "knowsAbout": [
               "Artificial Intelligence",
               "Generative AI",
               "Large Language Models",
               "Retrieval-Augmented Generation",
               "AI Agents",
+              "Model Context Protocol",
               "Backend Development",
               "Data Engineering",
               "Machine Learning",
@@ -92,16 +104,33 @@
         ]
       }
     </script>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("portfolio_theme");
+          var theme = saved === "light" || saved === "dark" ? saved : "dark";
+          var root = document.documentElement;
+          root.classList.remove("dark", "light");
+          root.classList.add(theme);
+          root.style.colorScheme = theme;
+          root.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;600;700;800;900&family=Figtree:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@500;700;800&family=Figtree:ital,wght@0,300..900;1,300..900&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-[#0A0B0C] text-[#F3F4F6] antialiased selection:bg-white/20 selection:text-white">
+  <body class="antialiased">
     <div id="root"></div>
-    <script>
-      document.documentElement.classList.add("dark");
-      document.documentElement.setAttribute("data-theme", "dark");
-    </script>
+    <noscript>
+      <main style="max-width:720px;margin:48px auto;padding:0 16px;font-family:system-ui,sans-serif;color:#ededed;background:#0a0b0c">
+        <h1>Ayushman Chakraborty</h1>
+        <p>AI, backend and data engineer in Bengaluru. Projects: ReleaseLens, CodeGlyph, Prepvia, Seamly, StrideCircle. Merged open source work in Better Auth and Corsair.</p>
+        <p><a href="https://github.com/ayushman46" style="color:#ededed">GitHub</a> · <a href="https://www.linkedin.com/in/ayushmanchakraborty" style="color:#ededed">LinkedIn</a> · <a href="mailto:ayushman.mitblr@gmail.com" style="color:#ededed">Email</a></p>
+      </main>
+    </noscript>
+    
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
