@@ -3,7 +3,8 @@ import React, { useEffect } from "react";
 export const SITE_URL = "https://ayushmanchakraborty.vercel.app";
 export const PERSON_ID = `${SITE_URL}/#person`;
 export const SITE_NAME = "Ayushman Chakraborty";
-export const DEFAULT_IMAGE = `${SITE_URL}/og-image.svg`;
+// Raster share card with the portrait: Google, LinkedIn, X and WhatsApp don't render SVG previews.
+export const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 interface SEOProps {
   title: string;

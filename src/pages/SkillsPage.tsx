@@ -48,7 +48,7 @@ export const SkillsPage: React.FC = () => {
     <>
       <SEO
         title="Skills | Ayushman Chakraborty"
-        description="Ayushman Chakraborty's skills: LLMs, RAG, AI agents and MCP; Python, SQL, Airflow, dbt and MLflow data pipelines; FastAPI, Next.js and TypeScript; AWS, Azure, Docker and OpenTelemetry."
+        description="Ayushman Chakraborty's skills, each backed by shipped code: LLMs, RAG, AI agents and evals; computer vision and real-time voice; Python, SQL, Airflow, dbt, Kafka and MLflow data pipelines; FastAPI, Next.js and TypeScript; Docker, OpenTelemetry and CI/CD."
         path="/skills"
       />
       <main id="main" className="page">

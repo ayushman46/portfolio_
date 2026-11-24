@@ -226,6 +226,11 @@
     min-width: 0;
   }
 
+  /* beats the first-row "td { display: block }" above, which otherwise shows row 1's code on phones */
+  .pb-table tbody tr:first-child .pb-col-code {
+    display: none;
+  }
+
   .pb-table .pb-col-item {
     grid-column: 1;
     grid-row: 1;

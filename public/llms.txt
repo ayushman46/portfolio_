@@ -22,18 +22,20 @@ This is the personal portfolio of Ayushman Chakraborty. It covers AI engineering
 
 ## Projects
 
-- CodeGlyph (production RAG + agentic code-intelligence SaaS, 30+ users, 5,000-file repos, agent opens multi-file PRs): https://ayushmanchakraborty.vercel.app/projects/codeglyph
-- Prepvia (real-time AI interview platform, 100+ users, 50+ completed interviews): https://ayushmanchakraborty.vercel.app/projects/prepvia
-- ReleaseLens (AIOps release intelligence on 519K+ CI builds; in progress): https://ayushmanchakraborty.vercel.app/projects/releaselens
+Figures below are from each project's own tests, benchmarks and docs (re-verified against the code on 2026-11-05).
+
+- CodeGlyph (live as Codebase Intel): cited code-intelligence SaaS for any public GitHub repo, 30+ users. Repos up to 10,000 files; hybrid FTS5 + vector retrieval with reciprocal-rank fusion and an import graph (62/64 retrieval eval targets); every file:line citation checked against the index (131/133 correct in a blind A/B); an edit agent opens multi-file pull requests after tree-sitter syntax checks in 13 languages. 1,428 backend, 389 frontend unit and 86 Playwright tests. Python, FastAPI, React, Turso, NVIDIA Nemotron. https://ayushmanchakraborty.vercel.app/projects/codeglyph
+- Prepvia (live as InterviewAI): voice-first AI mock-interview platform, 100+ users and 50+ completed interviews. Next.js 16 app streaming NDJSON over HTTP; Silero VAD, speculative Groq Whisper STT, hedged NVIDIA Nemotron calls, Edge neural TTS. Median voice turn 1.88 s; 50 concurrent candidates, 450 turns, 0 errors; LLM-judge quality 4.78/5. https://ayushmanchakraborty.vercel.app/projects/prepvia
+- ReleaseLens: release-intelligence platform, built and verified locally, not yet deployed. 360K+ CI builds (2.64M job rows, 1,300 projects) ingested with Airflow and dbt onto S3-compatible storage (MinIO); XGBoost trained on 128,819 Java builds across 402 projects (PR-AUC 0.811, ROC-AUC 0.881) predicts CI build-failure risk with SHAP reasons, p95 40 ms; OpenTelemetry traces through Kafka name a regression's probable origin and blast radius. https://ayushmanchakraborty.vercel.app/projects/releaselens
 - MandateGraph (authorization and security harness for AI agents; in progress, repo not public yet): https://ayushmanchakraborty.vercel.app/projects/mandategraph
-- twtdash: https://ayushmanchakraborty.vercel.app/projects/twtdash
-- Seamly: https://ayushmanchakraborty.vercel.app/projects/seamly
-- Settle: https://ayushmanchakraborty.vercel.app/projects/settle
-- StrideCircle: https://ayushmanchakraborty.vercel.app/projects/stridecircle
-- TraininGenie: https://ayushmanchakraborty.vercel.app/projects/trainingenie
-- ChaosAI: https://ayushmanchakraborty.vercel.app/projects/chaosai
-- Document QA: https://ayushmanchakraborty.vercel.app/projects/rag-document-qa
-- IPL Match Predictor: https://ayushmanchakraborty.vercel.app/projects/ipl-match-predictor
+- twtdash: local-first browser extension that turns X bookmarks into a searchable library, sorted on-device into 18 categories, with a UI in English, Hindi and 8 more Indian languages; 42 ms per keystroke at 10,000 posts; 437 unit tests, 339 end-to-end checks, 2,700 fuzzed payloads. https://ayushmanchakraborty.vercel.app/projects/twtdash
+- Seamly: in-browser cricket bowling coach (YOLO11 pose on ONNX Runtime Web, MotionBERT 3D lifting, two-camera fusion, pace without radar); release within one frame on 7 of 8 real clips; 364 Python-parity tests. https://ayushmanchakraborty.vercel.app/projects/seamly
+- Settle: PWA and Android app to split bills in India and get paid back over UPI, in 8 languages; AI bill reading, exact paise maths, native Android auto-settle; 5,081 unit and component tests and 364 end-to-end journeys. https://ayushmanchakraborty.vercel.app/projects/settle
+- StrideCircle: Strava group challenges with effort-weighted scoring, SQL-view leaderboards and Groq AI coaching. https://ayushmanchakraborty.vercel.app/projects/stridecircle
+- TraininGenie: production website for a corporate-training company, static Next.js 16 with JSON-LD, llms.txt and IndexNow; sole developer. https://ayushmanchakraborty.vercel.app/projects/trainingenie
+- ChaosAI: agentic chaos-engineering tool (LangGraph) built for the Bosch (BGSW) hackathon, Top 5; bounded faults against OpenMeter with verified rollback. https://ayushmanchakraborty.vercel.app/projects/chaosai
+- Document QA: local RAG over scanned PDFs with hybrid FAISS + BM25 retrieval and an LLM grounding check, on Ollama. https://ayushmanchakraborty.vercel.app/projects/rag-document-qa
+- IPL Match Predictor: Random Forest over 1,095 IPL matches (2008–2024) served by a Flask API. https://ayushmanchakraborty.vercel.app/projects/ipl-match-predictor
 
 ## Open source
 
@@ -45,7 +47,7 @@ This is the personal portfolio of Ayushman Chakraborty. It covers AI engineering
 
 ## Experience and education
 
-- Software Development Intern (Full Stack) at TraininGenie, May 2026 – Jul 2026: sole developer of the company's production website (Next.js, Supabase); led technical SEO and GEO.
+- Software Development Intern (Full Stack) at TraininGenie, May 2026 – Jul 2026: sole developer of the company's production website (static Next.js 16, TypeScript, Tailwind CSS, FormSubmit enquiries); led technical SEO and GEO (metadata, sitemaps, canonical URLs, JSON-LD, llms.txt, IndexNow).
 - Software Engineering and Generative AI Intern at Wipro Limited, Jun 2025 – Jul 2025: architected AutoBlog, a multimodal GenAI pipeline turning technical videos from 30+ internal sources into documentation (Whisper + computer vision, Azure OpenAI GPT-4o); frame deduplication cut frames sent to the model by 75% and sped up processing by about 40%; shipped via Streamlit and Docker.
 - B.Tech Computer Science and Engineering (Data Science) at Manipal Institute of Technology, Bengaluru, Jul 2023 – May 2027. Professional cricketer and athlete alongside the degree.
 

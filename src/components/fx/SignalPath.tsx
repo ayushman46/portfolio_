@@ -29,15 +29,15 @@ interface Pipeline {
   chips: { label: string; accent?: boolean }[];
 }
 
-// Every label is from the resume (scratchpad facts file) or what the site already states.
+// Every label is checked against the project's own code and docs (re-verified 2026-11-05) or, for Wipro, the resume.
 const PIPELINES: Pipeline[] = [
   {
     key: "codeglyph",
     tab: "codeglyph",
     href: "/projects/codeglyph",
-    summary: "Hybrid retrieval over a whole repo, answered with exact file and line citations.",
+    summary: "Hybrid retrieval over a whole repo, answered with file and line citations checked against the index.",
     stages: [
-      [{ id: "N01", lines: ["repo ingest", "≤5,000 files"] }],
+      [{ id: "N01", lines: ["repo ingest", "≤10,000 files"] }],
       [{ id: "N02", lines: ["incremental", "re-index"] }],
       [
         { id: "N03a", lines: ["vector"] },
@@ -46,10 +46,15 @@ const PIPELINES: Pipeline[] = [
         { id: "N03d", lines: ["dependency graph"], narrow: ["dependency", "graph"] },
       ],
       [{ id: "N04", lines: ["NVIDIA", "Nemotron"] }],
-      [{ id: "N05", lines: ["answer · exact", "file + line", "citations"], narrow: ["answer · exact file", "+ line citations"] }],
+      [{ id: "N05", lines: ["answer · checked", "file + line", "citations"], narrow: ["answer · checked file", "+ line citations"] }],
       [{ id: "N06", lines: ["agent opens", "multi-file PR"] }],
     ],
-    chips: [{ label: "production" }, { label: "30+ users", accent: true }, { label: "FastAPI · React · Docker" }],
+    chips: [
+      { label: "production" },
+      { label: "30+ users", accent: true },
+      { label: "131/133 citations correct" },
+      { label: "FastAPI · React · Turso" },
+    ],
   },
   {
     key: "autoblog",
@@ -73,21 +78,28 @@ const PIPELINES: Pipeline[] = [
     key: "releaselens",
     tab: "releaselens",
     href: "/projects/releaselens",
-    summary: "CI history to live release-risk scores, with traces tying deploys to regressions.",
+    summary: "CI history to live build-failure risk scores, with traces naming a regression's probable origin.",
     stages: [
-      [{ id: "N01", lines: ["519K+ CI builds"], metric: true }],
+      [{ id: "N01", lines: ["360K+ CI builds"], metric: true }],
       [{ id: "N02", lines: ["Airflow ETL"] }],
-      [{ id: "N03", lines: ["validated dbt", "marts · S3"] }],
-      [{ id: "N04", lines: ["XGBoost ·", "time-based", "validation"], narrow: ["XGBoost · time-", "based validation"] }],
+      [{ id: "N03", lines: ["validated dbt", "marts · MinIO"] }],
+      [
+        {
+          id: "N04",
+          lines: ["XGBoost ·", "time-based", "validation"],
+          narrow: ["XGBoost · time-", "based validation"],
+          chip: ["PR-AUC 0.811", "ROC-AUC 0.881"],
+        },
+      ],
       [{ id: "N05", lines: ["MLflow"] }],
       [{ id: "N06", lines: ["FastAPI live", "risk scoring"] }],
     ],
     branch: {
       id: "N07",
-      lines: ["OpenTelemetry", "deploy ↔", "regression traces"],
-      narrow: ["OpenTelemetry · deploy", "↔ regression traces"],
+      lines: ["OTel traces →", "probable origin", "+ blast radius"],
+      narrow: ["OpenTelemetry → Kafka →", "probable origin + blast radius"],
     },
-    chips: [{ label: "in progress" }],
+    chips: [{ label: "built locally · not deployed" }, { label: "p95 40 ms risk API", accent: true }],
   },
 ];
 

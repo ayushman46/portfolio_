@@ -19,8 +19,9 @@ const HAS_MANDATEGRAPH = ProjectData.some((p) => p.slug === "mandategraph");
 
 const ROWS: readonly Row[] = [
   { code: "WIP", item: "WIPRO AUTOBLOG", detail: "FRAMES −75% · ~40% FASTER", status: "SHIPPED", href: "/work" },
-  { code: "CGL", item: "CODEGLYPH", detail: "30+ USERS · 5,000-FILE REPOS", status: "LIVE", href: "/projects/codeglyph" },
+  { code: "CGL", item: "CODEGLYPH", detail: "30+ USERS · 10,000-FILE REPOS", status: "LIVE", href: "/projects/codeglyph" },
   { code: "PRV", item: "PREPVIA", detail: "100+ USERS · 50+ INTERVIEWS", status: "LIVE", href: "/projects/prepvia" },
+  { code: "STL", item: "SETTLE", detail: "5,081 TESTS · 364 E2E JOURNEYS", status: "LIVE", href: "/projects/settle" },
   {
     code: "BAU",
     item: "BETTER AUTH",
@@ -40,14 +41,14 @@ const ROWS: readonly Row[] = [
   {
     code: "TGN",
     item: "TRAININGENIE",
-    detail: "SOLE DEV · NEXT.JS + SUPABASE",
+    detail: "SOLE DEV · NEXT.JS · SEO + GEO",
     status: "SHIPPED",
     href: "/projects/trainingenie",
   },
   {
     code: "RLS",
     item: "RELEASELENS",
-    detail: "519K+ CI BUILDS · AIRFLOW→DBT→S3",
+    detail: "360K+ CI BUILDS · PR-AUC 0.811",
     status: "IN PROG",
     href: "/projects/releaselens",
   },

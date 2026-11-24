@@ -17,7 +17,8 @@ interface Check {
 const STAGES: Stage[] = ["open-source", "shipped", "certifications", "competitions"];
 
 /**
- * The ledger of proof. Every line is a verified fact (resume + what the site already states).
+ * The ledger of proof. Every line is a verified fact: project figures are checked against each repo's code and
+ * docs (re-verified 2026-11-05); user counts, awards and certifications come from the resume.
  * Open-source rows are the MERGED pull requests listed in src/components/OpenSource.tsx, same URLs.
  */
 const CHECKS: Check[] = [
@@ -39,7 +40,13 @@ const CHECKS: Check[] = [
     status: "pass",
   },
   // shipped
-  { stage: "shipped", label: "codeglyph", meta: "production · 30+ users", href: "/projects/codeglyph", status: "pass" },
+  {
+    stage: "shipped",
+    label: "codeglyph",
+    meta: "production · 30+ users · 131/133 citations correct",
+    href: "/projects/codeglyph",
+    status: "pass",
+  },
   {
     stage: "shipped",
     label: "prepvia",
@@ -47,15 +54,30 @@ const CHECKS: Check[] = [
     href: "/projects/prepvia",
     status: "pass",
   },
+  {
+    stage: "shipped",
+    label: "settle",
+    meta: "live · 5,081 tests · 364 E2E journeys",
+    href: "/projects/settle",
+    status: "pass",
+  },
   { stage: "shipped", label: "wipro autoblog", meta: "−75% frames · ~40% faster", href: "/work", status: "pass" },
   {
     stage: "shipped",
     label: "trainingenie",
-    meta: "production site · sole developer",
+    meta: "production site · sole developer · SEO + GEO",
     href: "/projects/trainingenie",
     status: "pass",
   },
-  // in flight: no public repo yet, so the row links only to its own project page
+  // in flight
+  {
+    stage: "shipped",
+    label: "releaselens",
+    meta: "built and verified locally · PR-AUC 0.811 · not yet deployed",
+    href: "/projects/releaselens",
+    status: "pending",
+  },
+  // no public repo yet, so the row links only to its own project page
   {
     stage: "shipped",
     label: "mandategraph",
@@ -77,7 +99,13 @@ const CHECKS: Check[] = [
   { stage: "certifications", label: "Computer Vision", meta: "Kaggle Learn · 1 Nov 2026", status: "pass" },
   { stage: "certifications", label: "Intro to Deep Learning", meta: "Kaggle Learn · 1 Nov 2026", status: "pass" },
   // competitions
-  { stage: "competitions", label: "Top 5 teams", meta: "Bosch (BGSW) Hackathon on Governing AI Agents", status: "pass" },
+  {
+    stage: "competitions",
+    label: "Top 5 teams",
+    meta: "Bosch (BGSW) Hackathon on Governing AI Agents · ChaosAI",
+    href: "/projects/chaosai",
+    status: "pass",
+  },
   { stage: "competitions", label: "Top 5 of 50 teams", meta: "Hackverse Hackathon (IBM & AWS)", status: "pass" },
 ];
 

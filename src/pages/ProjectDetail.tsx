@@ -26,6 +26,16 @@ const rowVariants: Variants = {
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
+// "By the numbers" columns per figure count, so every row is full (phones always get two columns, or one for three).
+const NUMBER_COLS: Record<number, string> = {
+  1: "grid-cols-1",
+  2: "grid-cols-2",
+  3: "grid-cols-1 min-[420px]:grid-cols-3",
+  4: "grid-cols-2 lg:grid-cols-4",
+  6: "grid-cols-2 sm:grid-cols-3",
+  8: "grid-cols-2 lg:grid-cols-4",
+};
+
 // 40px tap on phones
 const contactLinkClass =
   "jetbrains-mono inline-flex min-h-10 items-center text-xs text-[var(--text-primary)] underline decoration-[var(--text-subtle)] underline-offset-4 transition-colors hover:decoration-[var(--text-primary)] sm:min-h-0";
@@ -70,6 +80,7 @@ const ProjectDetail: React.FC = () => {
   // only link a write-up that actually exists
   const writeup = project.writeup ? BLOGS.find((post) => post.slug === project.writeup) : undefined;
   const pipeline = project.pipeline?.length ? project.pipeline : undefined;
+  const numbers = project.numbers?.length ? project.numbers : undefined;
   const repo = project.github ? (new URL(project.github).pathname.split("/").filter(Boolean)[1] ?? "") : "";
   const sourceLabel = project.liveLink
     ? new URL(project.liveLink).host
@@ -273,6 +284,50 @@ const ProjectDetail: React.FC = () => {
               )}
             </figcaption>
           </motion.figure>
+
+          {numbers && (
+            <section aria-labelledby="by-the-numbers" className="mt-12">
+              <header className="sec-head">
+                <span className="sec-index" aria-hidden>
+                  §
+                </span>
+                <h2 id="by-the-numbers" className="sec-title">
+                  <span className="sec-title-muted">By the</span> numbers
+                </h2>
+                <span className="leader" aria-hidden />
+                <span className="sec-aside" aria-hidden>
+                  {pad(numbers.length)} measured
+                </span>
+              </header>
+              <div className="frame-dashed">
+                <span className="xhair" aria-hidden />
+                {/* Every cell draws its top and left rule; the -1px shift tucks the outer ones under the frame's
+                    own border, so only the inner dashed grid shows whatever the count. */}
+                <motion.dl
+                  className={`grid overflow-hidden rounded-lg ${NUMBER_COLS[numbers.length] ?? "grid-cols-2 sm:grid-cols-3"}`}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, margin: "-60px" }}
+                >
+                  {numbers.map((figure, i) => (
+                    <motion.div
+                      key={figure.label}
+                      custom={i}
+                      variants={rowVariants}
+                      className="-mt-px -ml-px flex min-w-0 flex-col gap-1.5 border-t border-l border-dashed border-[var(--border-color)] px-3.5 py-4 sm:px-5 sm:py-5"
+                    >
+                      <dt className="jetbrains-mono order-2 text-[11.5px] leading-[1.5] text-pretty text-[var(--text-muted)]">
+                        {figure.label}
+                      </dt>
+                      <dd className="jetbrains-mono order-1 text-[clamp(1.25rem,1.05rem+0.9vw,1.625rem)] leading-none font-medium tracking-[-0.02em] whitespace-nowrap text-[var(--accent)] tabular-nums">
+                        {figure.value}
+                      </dd>
+                    </motion.div>
+                  ))}
+                </motion.dl>
+              </div>
+            </section>
+          )}
 
           {project.image && pipelineFrame && (
             <section aria-labelledby="how-it-works" className="mt-12">

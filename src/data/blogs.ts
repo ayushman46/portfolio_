@@ -21,7 +21,7 @@ export const BLOGS: Blog[] = [
     content: [
       "ReleaseLens is an AIOps and release-intelligence platform built around a practical question: can historical CI and repository signals help teams identify deployment risk before a release?",
       "The project starts with an Airflow-orchestrated ETL pipeline that turns heterogeneous CI and Git data into validated dbt analytics marts on S3-compatible storage. From there, time-based validation keeps the XGBoost models honest and MLflow makes experiments reproducible.",
-      "The next layer is observability. OpenTelemetry connects deployments with latency and error regressions so a risk score can be paired with likely root cause and blast radius — not just a number.",
+      "The next layer is observability. OpenTelemetry connects deployments with latency and error regressions so a risk score can be paired with a regression's probable origin and blast radius — not just a number.",
       "This is the kind of engineering I enjoy most: turning messy operational data into systems that are useful to people making decisions.",
     ],
   },

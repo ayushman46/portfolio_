@@ -26,12 +26,12 @@ const workData: WorkExperience[] = [
     period: "May 2026 – Jul 2026",
     location: "Remote",
     description: [
-      "Sole developer: built and launched the company's production website showcasing its corporate training programs, from architecture to launch (Next.js, Turso, Supabase).",
-      "Owned testing, debugging and deployment; optimised database queries for low latency and shipped zero-downtime updates.",
-      "Led technical SEO and GEO (metadata, sitemaps, canonical URLs, schema), improving discoverability on search and AI engines.",
+      "Sole developer: built and launched the company's production website showcasing its corporate training programs, from architecture to launch (Next.js 16, TypeScript, Tailwind CSS).",
+      "Owned testing, debugging and deployment of a fully static, prerendered site with a strict Content Security Policy and an enquiry form posted to FormSubmit, so there is no backend to run.",
+      "Led technical SEO and GEO (metadata, sitemaps, canonical URLs, JSON-LD schema, llms.txt, IndexNow), improving discoverability on search and AI engines.",
     ],
     links: [{ label: "trainingenie.com", href: "https://www.trainingenie.com" }],
-    skills: ["Next.js", "Turso", "Supabase", "TypeScript", "shadcn/ui", "Technical SEO / GEO"],
+    skills: ["Next.js", "TypeScript", "React", "Tailwind CSS", "shadcn/ui", "Technical SEO / GEO"],
     isCurrent: false,
   },
   {
